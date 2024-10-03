@@ -18,23 +18,30 @@ need to purchase for the week.
 
 ## Organize Requirements Below
 
+### External API: [Spoonacular](https://spoonacular.com/food-api/docs)
+
 ### 4 Main Features
 
 #### Recipe Search with Filters
-* Filters: cuisine, include ingredients, exclude equipment, max ready time
-* Search bar - specific recipe (title match - keyword search)
-#### Custom Recipe
-* Add Recipe Button
-* Instructions, Ingredients, Equipment, Ready Time
-* Only seen by user
-* Custom database
+A search page where visitors can search for certain recipes and filter recipes based on preferences. Visitors can preview a recipe before deciding to be redirected to the recipe details page. 
+* Filters: equipment, cuisine, max ready time, diet, intolerances
+* Search Bar: specific recipe (title match & keyword search)
+
 #### Personal Library
-* Only seen by user
-* Custom Recipes & Save Recipes by External API
-* Recipe Card creation/display
-* Search bar for recipe
+Logged in users have access to a personal list of bookmarked recipes.
+* Saved recipes include custom recipes & recipes from the external API
+* Search bar to lookup a bookmarked recipe
+* Add recipe button
+* Recipe card creation & display
+
+#### Custom Recipe
+Logged in users can add their own custom recipes to their personal library.
+* Form: Instructions, Ingredients, Equipment, Ready Time, Cuisine
+* Custom database
+
 #### STRETCH GOAL - Meal Planner & Shopping List
-* Meal Planner - Weekly
+Logged in users can meal plan on a weekly basis and generate a shopping list based on ingredients from recipes.
+* Meal Planner Calendar
 * Add to Shopping List / Generate Shopping List
 
 
