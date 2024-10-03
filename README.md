@@ -1,1 +1,1 @@
-# niantic-2024-final-capstone-recipe-book
+# Final Capstone
