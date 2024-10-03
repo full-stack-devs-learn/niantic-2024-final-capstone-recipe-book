@@ -17,3 +17,35 @@ need to purchase for the week.
 
 
 ## Organize Requirements Below
+
+### 4 Main Features
+
+#### Recipe Search with Filters
+* Filters: cuisine, include ingredients, exclude equipment, max ready time
+* Search bar - specific recipe (title match - keyword search)
+#### Custom Recipe
+* Add Recipe Button
+* Instructions, Ingredients, Equipment, Ready Time
+* Only seen by user
+* Custom database
+#### Personal Library
+* Only seen by user
+* Custom Recipes & Save Recipes by External API
+* Recipe Card creation/display
+* Search bar for recipe
+#### STRETCH GOAL - Meal Planner & Shopping List
+* Meal Planner - Weekly
+* Add to Shopping List / Generate Shopping List
+
+
+### Users
+#### Non-User
+* Can see recipes from External API
+#### User
+* Can see recipes from External API
+* Personal Library
+* Custom Recipe
+#### Admin
+* Can see recipes from External API
+* Sees all custom recipes from all users
+* Delete recipes based on guidelines
