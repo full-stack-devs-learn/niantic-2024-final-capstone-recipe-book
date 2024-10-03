@@ -3,7 +3,7 @@ import App from './App.tsx'
 import './index.css'
 
 import 'bootstrap/dist/js/bootstrap.min.js'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootswatch/dist/minty/bootstrap.min.css'
 import { Provider } from 'react-redux'
 import store from './store/store.ts'
 
