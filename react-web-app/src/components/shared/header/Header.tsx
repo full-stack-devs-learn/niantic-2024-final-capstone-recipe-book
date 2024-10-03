@@ -27,6 +27,12 @@ export default function Header() {
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/">Home</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/recipes">Recipe Search</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/">Profile</NavLink>
+                        </li>
                     </ul>
                     <ul className="navbar-nav ms-auto" >
 

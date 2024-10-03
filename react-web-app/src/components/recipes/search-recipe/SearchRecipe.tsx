@@ -1,8 +1,15 @@
-export default function SearchRecipe()
-{
+export default function SearchRecipe() {
     return (
         <>
-        <h3>Search Recipes</h3>
+            <main>
+
+            </main>
+            <aside>
+                <form className="d-flex">
+                    <input className="form-control me-sm-2" type="search" placeholder="Search" />
+                    <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </aside>
         </>
     )
 }   
