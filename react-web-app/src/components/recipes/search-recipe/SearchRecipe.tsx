@@ -1,10 +1,35 @@
 import RecipeCard from "../recipe-card/RecipeCard";
+import {useState, useEffect} from "react";
+import SpoonacularService from "./services/spoonacular-service.tsx"
 
 export default function SearchRecipe() {
+
+    const [recipes, setRecipes] = useState<SearchRecipe[]>([]);
+
+    async function loadRecipes()
+    {
+        const searchResults = await SpoonacularService.getRecipesByUserInput("query=pasta&maxFat=25&number=2");
+        setRecipes(searchResults.results);
+    }
+
+    useEffect(() => {
+
+        loadRecipes();
+
+    }, [])
+
+
     return (
         <>
             <main>
-               <RecipeCard />
+            {
+            recipes.map((recipe) => (
+                <RecipeCard key={recipe.id}
+                    title={recipe.title}
+                    image={recipe.image}
+                    ></RecipeCard>
+            ))
+            }
             </main>
             <aside>
                 <form className="d-flex">
