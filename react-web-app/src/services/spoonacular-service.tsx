@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Recipe } from "../models/recipe"
-import { SearchRecipe } from "../models/search-recipe";
+import { SearchRecipe } from "../models/search-recipes/search-recipe";
 
-export class SpoonacularService
+class SpoonacularService
 {
     baseUrl = 'https://api.spoonacular.com/recipes'
 
@@ -18,3 +18,6 @@ export class SpoonacularService
         return response.data;
     }
 }
+
+const spoonacularService = new SpoonacularService();
+export default spoonacularService;
