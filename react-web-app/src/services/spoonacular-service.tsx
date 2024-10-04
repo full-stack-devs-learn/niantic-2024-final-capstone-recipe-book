@@ -4,11 +4,11 @@ import { SearchRecipe } from "../models/search-recipes/search-recipe";
 
 class SpoonacularService
 {
-    baseUrl = 'https://api.spoonacular.com/recipes'
+    baseUrl = `https://api.spoonacular.com/recipes`
 
     async getRecipesByUserInput(query: string) 
     {
-        const response = await axios.get<SearchRecipe[]>(`${this.baseUrl}/complexSearch?${query}`);
+        const response = await axios.get<SearchRecipe>(`${this.baseUrl}/complexSearch?apiKey=${import.meta.env.VITE_API_KEY}&${query}`);
         return response.data;
     }
 
