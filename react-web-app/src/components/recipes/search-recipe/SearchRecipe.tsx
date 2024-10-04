@@ -1,14 +1,15 @@
 import RecipeCard from "../recipe-card/RecipeCard";
 import {useState, useEffect} from "react";
-import SpoonacularService from "./services/spoonacular-service.tsx"
+import spoonacularService from "../../../services/spoonacular-service";
+import { SearchResults } from "../../../models/search-recipes/search-results";
 
 export default function SearchRecipe() {
 
-    const [recipes, setRecipes] = useState<SearchRecipe[]>([]);
+    const [recipes, setRecipes] = useState<SearchResults[]>([]);
 
     async function loadRecipes()
     {
-        const searchResults = await SpoonacularService.getRecipesByUserInput("query=pasta&maxFat=25&number=2");
+        const searchResults = await spoonacularService.getRecipesByUserInput("query=pasta&maxFat=25&number=2");
         setRecipes(searchResults.results);
     }
 
