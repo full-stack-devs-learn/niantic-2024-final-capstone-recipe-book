@@ -1,6 +1,9 @@
+import './FilterSideBar.css';
+
 export default function FilterSideBar() {
     return (
         <aside>
+            <h3>Filters</h3>
             <div id="prep-time-slider">
                 <label htmlFor="customRange1" className="form-label">Total Time</label>
                 <input type="range" className="form-range" min="0" max="120" step="10" id="customRange3" />
@@ -418,6 +421,7 @@ export default function FilterSideBar() {
                                 </div> */}
                 {/* </div> */}
             </div>
+            <button className="submit btn btn-outline-primary">Submit</button>
 
         </aside>
     )
