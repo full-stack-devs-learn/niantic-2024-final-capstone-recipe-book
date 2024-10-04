@@ -1,7 +1,5 @@
-export class SearchRecipe 
+export class SearchResults
 {
-    offset!: number;
-    number!: number;
     id!: number;
     title!: string;
     image!: string;
