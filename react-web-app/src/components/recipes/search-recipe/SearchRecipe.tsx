@@ -1,8 +1,10 @@
+import RecipeCard from "../recipe-card/RecipeCard";
+
 export default function SearchRecipe() {
     return (
         <>
             <main>
-
+               <RecipeCard />
             </main>
             <aside>
                 <form className="d-flex">
