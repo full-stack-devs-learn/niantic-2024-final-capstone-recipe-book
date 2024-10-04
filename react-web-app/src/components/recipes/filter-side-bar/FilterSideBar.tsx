@@ -1,9 +1,24 @@
+import { useState } from 'react';
 import './FilterSideBar.css';
 
-export default function FilterSideBar() {
+export default function FilterSideBar(props: {onFiltered:(value: string) => void})
+{
+    const [query, setQuery] = useState<string>("");
+    const [totalTime, setTotalTime] = useState<string>("");
+    const [diet, setDiet] = useState<string>("");
+    const [cuisine, setCuisine] = useState<string>("");
+    const [intolerances, setIntolerances] = useState<string>("");
+
+    function buildQueryString()
+    {
+        // how to pull checkboxes checked after form submission to build query string
+        // how to get values from number range slider
+    }
+
     return (
         <aside>
             <h3>Filters</h3>
+            <form onSubmit={() => buildQueryString()}>
             <div id="prep-time-slider">
                 <label htmlFor="customRange1" className="form-label">Total Time</label>
                 <input type="range" className="form-range" min="0" max="120" step="10" id="customRange3" />
@@ -19,163 +34,163 @@ export default function FilterSideBar() {
                     <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     African
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Asian
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     American
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     British
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Cajun
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Caribbean
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Chinese
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Eastern European
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     European
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     French
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     German
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Greek
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Indian
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Irish
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Italian
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Japanese
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Jewish
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Korean
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Latin American
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Mediterranean
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Mexican
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Middle Eastern
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Nordic
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Southern
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Spanish
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Thai
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input className="form-check-input cuisine-check" type="checkbox" value="" id="flexCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Vietnamese
                                 </label>
@@ -422,7 +437,7 @@ export default function FilterSideBar() {
                 {/* </div> */}
             </div>
             <button className="submit btn btn-outline-primary">Submit</button>
-
+            </form>
         </aside>
     )
 }
