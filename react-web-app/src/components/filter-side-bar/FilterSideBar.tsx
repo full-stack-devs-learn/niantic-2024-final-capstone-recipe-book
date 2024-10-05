@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './FilterSideBar.css';
 import TotalTime from './total-time/TotalTime';
 import Cuisine from './cuisine/Cuisine';
@@ -7,7 +7,6 @@ import Intolerances from './intolerances/Intolerances';
 
 export default function FilterSideBar(props: {onFiltered:(value: string) => void})
 {
-    const [query, setQuery] = useState<string>("");
     const [totalTime, setTotalTime] = useState<string>("");
     const [diet, setDiet] = useState<string>("");
     const [cuisine, setCuisine] = useState<string>("");
@@ -15,28 +14,39 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
 
     function buildQueryString()
     {
-        // how to pull checkboxes checked after form submission to build query string
-        // how to get values from number range slider
+        let str = "";
+
+        if (diet)
+        {
+            str = str + diet;
+        } 
+
+        console.log("BUILD FilterSide", str);
+        
+        props.onFiltered(str);
     }
+
+    useEffect(() => {
+        buildQueryString();
+    }, [diet])
 
     return (
         <aside>
             <h3>Filters</h3>
-
-            {/* <form onSubmit={() => buildQueryString()}> */}
 
             <TotalTime />
 
 
             <div className="accordion" id="accordionExample">
                 <Cuisine />
-                <Diet onDietApply={buildQueryString} />
+                <Diet onDietApply={(dietString: string) => 
+                    {
+                        setDiet(dietString);
+                    }} />
                 <Intolerances />
             </div>
 
             <button className="submit btn btn-outline-primary">Submit</button>
-
-            {/* </form> */}
         </aside>
     )
 }
