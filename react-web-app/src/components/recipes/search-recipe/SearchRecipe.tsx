@@ -8,8 +8,9 @@ import FilterSideBar from "../../filter-side-bar/FilterSideBar";
 export default function SearchRecipe() {
 
     const [recipes, setRecipes] = useState<SearchResults[]>([]);
-    const [query, setQuery]     = useState<string>("");
     const [action, setAction]   = useState<string>("");
+    const [search, setSearch]   = useState<string>("");
+    const [filter, setFilter]   = useState<string>("");
 
     useEffect(() => {
 
@@ -19,7 +20,7 @@ export default function SearchRecipe() {
 
     async function loadRecipes()
     {
-        const searchResults = await spoonacularService.getRecipesByUserInput(query + "&number=2");
+        const searchResults = await spoonacularService.getRecipesByUserInput(action + "&number=2");
         setRecipes(searchResults.results);
     }
 
@@ -28,10 +29,18 @@ export default function SearchRecipe() {
         event.preventDefault();
     }
 
-    function buildFilters(filters: string)
+    function buildFilters(filterStr: string)
     {
-        setQuery(filters);
-        setAction("filter");
+        setFilter(filterStr);
+        setAction(search + filterStr);
+
+        console.log("BUILD FILTER", action, "Filter", filterStr)
+    }
+
+    function buildSearch(searchStr: string)
+    {
+        setSearch("&query=" + searchStr);
+        console.log("BUILD SEARCH", action)
     }
 
     return (
@@ -39,8 +48,8 @@ export default function SearchRecipe() {
             <FilterSideBar onFiltered={(str: string) => buildFilters(str)} />
             <main>
                 <form className="d-flex" onSubmit={(e) => searchHandler(e)}>
-                    <input className="form-control me-sm-2" type="search" placeholder="Search" id="queryText" onChange={ (e) => setQuery("&query=" + e.target.value) } />
-                    <button className="btn btn-secondary my-2 my-sm-0" type="submit" onClick={() => setAction("Search")}>Search</button>
+                    <input className="form-control me-sm-2" type="search" placeholder="Search" id="queryText" onChange={ (e) => buildSearch(e.target.value) } />
+                    <button className="btn btn-secondary my-2 my-sm-0" type="submit" onClick={() => setAction(search + filter)}>Search</button>
                 </form>
 
                 {
