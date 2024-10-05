@@ -30,7 +30,7 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
 
             <div className="accordion" id="accordionExample">
                 <Cuisine />
-                <Diet />
+                <Diet onDietApply={buildQueryString} />
                 <Intolerances />
             </div>
 
