@@ -23,7 +23,7 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
         <aside>
             <h3>Filters</h3>
 
-            <form onSubmit={() => buildQueryString()}>
+            {/* <form onSubmit={() => buildQueryString()}> */}
 
             <TotalTime />
 
@@ -35,8 +35,8 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
             </div>
 
             <button className="submit btn btn-outline-primary">Submit</button>
-            
-            </form>
+
+            {/* </form> */}
         </aside>
     )
 }
