@@ -49,6 +49,7 @@ public class DemoController
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> userProfile(Principal principal)
     {
+        //Principal is the logged-in user!
         var user = userDao.getByUserName(principal.getName());
         return ResponseEntity.ok(user);
     }
