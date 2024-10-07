@@ -20,7 +20,7 @@ export default function SearchRecipe() {
 
     async function loadRecipes()
     {
-        const searchResults = await spoonacularService.getRecipesByUserInput(action + "&number=2");
+        const searchResults = await spoonacularService.getRecipesByUserInput(action + "&number=2&instructionsRequired=true");
         setRecipes(searchResults.results);
     }
 
@@ -57,6 +57,7 @@ export default function SearchRecipe() {
                         <RecipeCard key={recipe.id}
                             title={recipe.title}
                             image={recipe.image}
+                            id={recipe.id}
                         ></RecipeCard>
                     ))
                 }
