@@ -22,6 +22,25 @@ CREATE TABLE users (
                        PRIMARY KEY (user_id)
 );
 
+CREATE TABLE recipes_list (
+						recipe_id INT NOT NULL AUTO_INCREMENT,
+                        user_id INT NOT NULL,
+                        is_custom BOOLEAN NOT NULL,
+                        database_id INT NOT NULL,
+                        PRIMARY KEY (recipe_id),
+                        FOREIGN KEY(user_id) REFERENCES users(user_id)
+				);
+
+CREATE TABLE custom_recipes (
+						custom_id INT NOT NULL AUTO_INCREMENT,
+                        user_id INT NOT NULL,
+                        title VARCHAR(100) NOT NULL,
+                        image VARCHAR(500),
+                        instructions LONGTEXT,
+                        ingredients LONGTEXT,
+                        PRIMARY KEY (custom_id),
+                        FOREIGN KEY (user_id) REFERENCES users(user_id)
+);                        
 
 /*  INSERT Users  */
 /* Users and Passwords
