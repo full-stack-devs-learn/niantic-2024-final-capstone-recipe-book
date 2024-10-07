@@ -26,6 +26,7 @@ export default function RecipeDetails()
     return (
         <>
         <h3>{recipeData?.title}</h3>
+        <button className="btn btn-info">Add Recipe to Library</button>
         <h5>Instructions</h5>
         <p>{recipeData?.instructions}</p>
         <img src={recipeData?.image} />
