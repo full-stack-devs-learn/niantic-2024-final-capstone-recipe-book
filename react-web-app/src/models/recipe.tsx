@@ -1,4 +1,4 @@
-import Ingredient from './ingredient.tsx'
+import {Ingredient} from './ingredient.tsx'
 
 export class Recipe
 {

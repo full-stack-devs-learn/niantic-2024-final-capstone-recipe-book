@@ -15,7 +15,7 @@ class SpoonacularService
 
     async getRecipeById(id: number)
     {
-        const response = await axios.get<Recipe>(`${this.baseUrl}/${id}/information`);
+        const response = await axios.get<Recipe>(`${this.baseUrl}/${id}/information?apiKey=${import.meta.env.VITE_API_KEY}`);
         return response.data;
     }
 }
