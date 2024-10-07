@@ -21,14 +21,17 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
             str = str + diet;
         } 
 
-        console.log("BUILD FilterSide", str);
+        if (intolerances)
+        {
+            str = str + intolerances;
+        }
         
         props.onFiltered(str);
     }
 
     useEffect(() => {
         buildQueryString();
-    }, [diet])
+    }, [diet, intolerances])
 
     return (
         <aside>
@@ -43,7 +46,10 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
                     {
                         setDiet(dietString);
                     }} />
-                <Intolerances />
+                <Intolerances onIntoleranceApply={(intoleranceString: string) =>
+                {
+                    setIntolerances(intoleranceString);
+                }}/>
             </div>
 
             <button className="submit btn btn-outline-primary">Submit</button>
