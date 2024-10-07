@@ -60,15 +60,6 @@ export default function SearchRecipe() {
                         ></RecipeCard>
                     ))
                 }
-                <RecipeCard
-                    title="title"
-                    image="image" />
-                <RecipeCard
-                    title="title"
-                    image="image" />
-                <RecipeCard
-                    title="title"
-                    image="image" />
             </main>
         </div>
     )

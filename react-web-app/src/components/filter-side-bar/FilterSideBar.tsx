@@ -25,13 +25,18 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
         {
             str = str + intolerances;
         }
+
+        if (cuisine)
+        {
+            str = str + cuisine;
+        }
         
         props.onFiltered(str);
     }
 
     useEffect(() => {
         buildQueryString();
-    }, [diet, intolerances])
+    }, [diet, intolerances, cuisine])
 
     return (
         <aside>
@@ -41,7 +46,9 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
 
 
             <div className="accordion" id="accordionExample">
-                <Cuisine />
+                <Cuisine onCuisineApply={(cuisineString: string) => {
+                    setCuisine(cuisineString);
+                }} />
                 <Diet onDietApply={(dietString: string) => 
                     {
                         setDiet(dietString);
