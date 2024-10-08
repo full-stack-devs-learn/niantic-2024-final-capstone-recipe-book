@@ -31,8 +31,8 @@ export default function Header() {
                             <NavLink className="nav-link" to="/recipes">Recipe Search</NavLink>
                         </li>
                         <li className="nav-item dropdown">
-                            <NavLink to="/user/1/profile" className="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">User</NavLink>
-                            <div className="dropdown-menu show" data-bs-popper="static">
+                            <NavLink to="/user/1/profile" className="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="true">User</NavLink>
+                            <div className="dropdown-menu">
                                 <Link className="dropdown-item" to="/user/1/profile">Profile</Link>
                                 <div className="dropdown-divider"></div>
                                 <Link className="dropdown-item" to="/user/1/library">Library</Link>
