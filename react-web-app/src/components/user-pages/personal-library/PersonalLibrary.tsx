@@ -1,12 +1,27 @@
 import RecipeCard from "../../recipes/recipe-card/RecipeCard";
+import recipesListService from "../../../services/recipes-list-service";
 import spoonacularService from "../../../services/spoonacular-service";
+import { useEffect, useState } from "react";
+import { SearchResults } from "../../../models/search-recipes/search-results";
 
 export default function PersonalLibrary()
 {
     const firstName = 'Gregor';
     const lastName = 'Dzierzon';
 
-    // const recipe = 
+    const [library, setLibrary] = useState<SearchResults[]>([]);
+
+    useEffect(() => {
+
+        getLibrary();
+
+    }, [])
+
+    async function getLibrary()
+    {
+        const libraryItems = await recipesListService.getUserLibrary();
+        setLibrary(libraryItems);
+    }
 
     return (
         <>
@@ -21,11 +36,14 @@ export default function PersonalLibrary()
             <button type="submit" className="btn btn-secondary my-2 my-sm-0">Search</button> 
         </form>
 
-        {/* <RecipeCard key={recipe.id}
+        {
+            library.map((recipe) => (
+                <RecipeCard key={recipe.id}
                             title={recipe.title}
                             image={recipe.image}
-                            id={recipe.id} /> */}
-
+                            id={recipe.id} />
+            ))
+        }
         </main>
         </>
     )
