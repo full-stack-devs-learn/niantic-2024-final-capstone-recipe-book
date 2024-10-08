@@ -23,13 +23,13 @@ CREATE TABLE users (
 );
 
 CREATE TABLE custom_recipes (
-						custom_id INT NOT NULL AUTO_INCREMENT,
+						id INT NOT NULL AUTO_INCREMENT,
                         user_id INT NOT NULL,
                         title VARCHAR(100) NOT NULL,
                         image VARCHAR(500),
                         instructions LONGTEXT,
                         ingredients LONGTEXT,
-                        PRIMARY KEY (custom_id),
+                        PRIMARY KEY (id),
                         FOREIGN KEY (user_id) REFERENCES users(user_id)
 );   
 
@@ -51,7 +51,7 @@ CREATE TABLE recipes_list (
                         external_id INT,
                         PRIMARY KEY (id),
                         FOREIGN KEY(user_id) REFERENCES users(user_id),
-                        FOREIGN KEY(custom_id) REFERENCES custom_recipes(custom_id),
+                        FOREIGN KEY(custom_id) REFERENCES custom_recipes(id),
                         FOREIGN KEY(external_id) REFERENCES external_recipes(external_id)
 				);                     
 

@@ -2,6 +2,7 @@ package com.niantic.controllers;
 
 import com.niantic.data.MySqlRecipeListDao;
 import com.niantic.data.UserDao;
+import com.niantic.models.CustomRecipe;
 import com.niantic.models.ExternalRecipeCard;
 import com.niantic.models.RecipeSearch;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,14 @@ public class RecipeListController
         return ResponseEntity.ok(library);
     }
 
+    @GetMapping("custom/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> getCustomRecipeById(Principal principal, @PathVariable int id)
+    {
+        CustomRecipe recipe = recipeListDao.getCustomRecipeById(id);
+        return ResponseEntity.ok(recipe);
+    }
+
     @PostMapping("add")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> addRecipeFromExternalAPI(Principal principal, @RequestBody ExternalRecipeCard recipeCard)
@@ -50,6 +59,6 @@ public class RecipeListController
         }
 
         int[] body = recipeListDao.addRecipeFromExternalAPI(userId, recipeCard.getApiId(), recipeCard.getTitle(), recipeCard.getImage());
-        return ResponseEntity.ok(body);
+        return ResponseEntity.status(201).body(body);
     }
 }

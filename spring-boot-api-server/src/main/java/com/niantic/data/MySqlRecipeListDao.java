@@ -1,5 +1,6 @@
 package com.niantic.data;
 
+import com.niantic.models.CustomRecipe;
 import com.niantic.models.RecipeSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -89,29 +90,57 @@ public class MySqlRecipeListDao
         List<RecipeSearch> library = new ArrayList<RecipeSearch>();
 
         String sql = """
-                SELECT * FROM
-                recipes_list as r
-                INNER JOIN custom_recipes as c ON r.user_id=c.user_id
-                WHERE r.user_id = ? AND is_custom = 1;
+                SELECT
+                	r.id
+                	, r.is_custom
+                    , r.custom_id
+                    , e.api_id
+                    , c.title AS custom_title
+                    , e.title AS external_title
+                    , c.image AS custom_image
+                	, e.image AS external_image
+                FROM recipes_list as r
+                LEFT JOIN custom_recipes as c ON r.user_id=c.user_id and r.is_custom = 1
+                LEFT JOIN external_recipes e ON e.user_id=r.user_id and r.is_custom = 0
+                WHERE r.user_id = ?;
                 """;
 
         var row = jdbcTemplate.queryForRowSet(sql, userId);
 
         while(row.next())
         {
-            String title = row.getString("title");
-            String image = row.getString("image");
-            int id = row.getInt("id");
             boolean isCustom = row.getBoolean("is_custom");
+            int customId = row.getInt("custom_id");
+            int apiId = row.getInt("api_id");
+            String customTitle = row.getString("custom_title");
+            String externalTitle = row.getString("external_title");
+            String customImage = row.getString("custom_image");
+            String externalImage = row.getString("external_image");
+            int id = row.getInt("id");
 
-            int databaseId;
-            if (isCustom) databaseId = row.getInt("custom_id");
-            else databaseId = row.getInt("api_id");
-
-
-
-            library.add(new RecipeSearch(title, image, id, userId, isCustom, databaseId));
+            library.add(new RecipeSearch(id, userId, isCustom, customId, apiId, customTitle, externalTitle, customImage, externalImage));
         }
         return library;
+    }
+
+    public CustomRecipe getCustomRecipeById(int id)
+    {
+        String sql = "SELECT * FROM custom_recipes WHERE id = ?";
+
+        var row = jdbcTemplate.queryForRowSet(sql, id);
+
+        if (row.next())
+        {
+            int userId = row.getInt("user_id");
+            String title = row.getString("title");
+            String image = row.getString("image");
+            String instructions = row.getString("instructions");
+            String ingredients = row.getString("ingredients");
+
+            CustomRecipe customRecipe = new CustomRecipe(id, userId, title, image, instructions, ingredients);
+
+            return customRecipe;
+        }
+        return null;
     }
 }

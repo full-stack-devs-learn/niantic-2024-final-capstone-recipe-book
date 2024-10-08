@@ -55,6 +55,7 @@ export default function SearchRecipe() {
                 {
                     recipes.map((recipe) => (
                         <RecipeCard key={recipe.id}
+                            isCustom={false}
                             title={recipe.title}
                             image={recipe.image}
                             id={recipe.id}
