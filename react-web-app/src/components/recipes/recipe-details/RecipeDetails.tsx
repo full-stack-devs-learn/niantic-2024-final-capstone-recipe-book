@@ -32,7 +32,10 @@ export default function RecipeDetails() {
         }
     }
 
-    function addRecipeToLibrary() {
+    function addRecipeToLibrary(event: FormEvent) {
+        event.preventDefault();
+        event.stopPropagation();
+
         const addRecipe = {
             apiId: +id,
             title: recipeData?.title,
@@ -46,7 +49,7 @@ export default function RecipeDetails() {
             <h3>{+custom ? customRecipeData?.title : recipeData?.title}</h3>
             {
                 +custom ? <></>
-                : <button className="btn btn-info" onClick={addRecipeToLibrary}>Add Recipe to Library</button> 
+                : <button className="btn btn-info" onClick={(e) => addRecipeToLibrary(e)}>Add Recipe to Library</button> 
             }
             <h5>Instructions</h5>
             <p>{+custom ? customRecipeData?.instructions : recipeData?.instructions}</p>
