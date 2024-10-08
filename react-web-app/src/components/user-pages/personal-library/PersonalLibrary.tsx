@@ -2,14 +2,14 @@ import RecipeCard from "../../recipes/recipe-card/RecipeCard";
 import recipesListService from "../../../services/recipes-list-service";
 import spoonacularService from "../../../services/spoonacular-service";
 import { useEffect, useState } from "react";
-import { SearchResults } from "../../../models/search-recipes/search-results";
+import { LibraryRecipeCard } from "../../../models/personal-library/library-recipe-card";
 
 export default function PersonalLibrary()
 {
     const firstName = 'Gregor';
     const lastName = 'Dzierzon';
 
-    const [library, setLibrary] = useState<SearchResults[]>([]);
+    const [library, setLibrary] = useState<LibraryRecipeCard[]>([]);
 
     useEffect(() => {
 
@@ -24,6 +24,7 @@ export default function PersonalLibrary()
         setLibrary(libraryItems);
 
         // external API call
+
     }
 
     return (
@@ -41,10 +42,11 @@ export default function PersonalLibrary()
 
         {
             library.map((recipe) => (
-                <RecipeCard key={recipe.id}
-                            title={recipe.title}
-                            image={recipe.image}
-                            id={recipe.id} />
+                    <RecipeCard key={recipe.id}
+                            isCustom={recipe.isCustom}
+                            title={recipe.isCustom ? recipe.customTitle : recipe.externalTitle}
+                            image={recipe.isCustom ? recipe.customImage : recipe.externalImage}
+                            id={recipe.isCustom ? recipe.customId : recipe.apiId} />
             ))
         }
         </main>

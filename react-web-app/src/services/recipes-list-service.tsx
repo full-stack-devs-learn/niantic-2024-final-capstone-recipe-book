@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import store, { RootState } from "../store/store";
-import { SearchResults } from "../models/search-recipes/search-results";
+import { Recipe } from "../models/recipe";
+import { LibraryRecipeCard } from "../models/personal-library/library-recipe-card";
 
 class RecipesListService
 {
@@ -34,9 +35,15 @@ class RecipesListService
 
     async getUserLibrary()
     {
-        const response = await axios.get<SearchResults[]>(`${this.baseUrl}/api/recipe-list `, this.createHeaders());
+        const response = await axios.get<LibraryRecipeCard[]>(`${this.baseUrl}/api/recipe-list`, this.createHeaders());
         return response.data;
 
+    }
+
+    async getCustomRecipeById(id: number)
+    {
+        const response = await axios.get<Recipe>(`${this.baseUrl}/api/recipe-list/custom/${id}`, this.createHeaders());
+        return response.data;
     }
 
 }
