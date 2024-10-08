@@ -33,15 +33,26 @@ CREATE TABLE custom_recipes (
                         FOREIGN KEY (user_id) REFERENCES users(user_id)
 );   
 
+CREATE TABLE external_recipes (
+						external_id INT NOT NULL AUTO_INCREMENT,
+						api_id INT NOT NULL,
+                        user_id INT NOT NULL,
+                        title VARCHAR(100) NOT NULL,
+                        image VARCHAR(500),
+                        PRIMARY KEY (external_id),
+                        FOREIGN KEY (user_id) REFERENCES users(user_id)
+);   
+
 CREATE TABLE recipes_list (
 						id INT NOT NULL AUTO_INCREMENT,
                         user_id INT NOT NULL,
                         is_custom BOOLEAN NOT NULL DEFAULT FALSE,
                         custom_id INT,
-                        api_id INT,
+                        external_id INT,
                         PRIMARY KEY (id),
                         FOREIGN KEY(user_id) REFERENCES users(user_id),
-                        FOREIGN KEY(custom_id) REFERENCES custom_recipes(custom_id)
+                        FOREIGN KEY(custom_id) REFERENCES custom_recipes(custom_id),
+                        FOREIGN KEY(external_id) REFERENCES external_recipes(external_id)
 				);                     
 
 /*  INSERT Users  */
@@ -67,6 +78,6 @@ VALUES  ('user','$2a$10$NkufUPF3V8dEPSZeo1fzHe9ScBu.LOay9S3N32M84yuUM2OJYEJ/.','
 INSERT INTO custom_recipes (user_id, title, image, instructions, ingredients)
 VALUES (1, 'Recipe Title', 'https://img.spoonacular.com/recipes/716429-556x370.jpg', '1. Cook', 'eggs');
 
-INSERT INTO recipes_list (user_id, is_custom, custom_id, api_id)
+INSERT INTO recipes_list (user_id, is_custom, custom_id, external_id)
 VALUES (1, True, 1, NULL)
 

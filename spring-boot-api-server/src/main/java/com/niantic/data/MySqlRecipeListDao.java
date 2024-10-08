@@ -24,27 +24,64 @@ public class MySqlRecipeListDao
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public int addRecipeFromExternalAPI(int userId, int apiId)
+    public int[] addRecipeFromExternalAPI(int userId, int apiId, String title, String image)
     {
+        int[] keys = new int[2];
 
-        String sql = "INSERT INTO recipes_list (user_id, api_id) " +
-                " VALUES (?, ?) ";
+        String sql1 = "INSERT INTO recipes_list (user_id, external_id) " +
+                    " VALUES (?, ?);";
+
+        String sql2 = """
+                INSERT INTO external_recipes (api_id, user_id, title, image)
+                VALUES (?, ?, ?, ?);
+                """;
 
         // insert a new record and retrieve the generated id
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+        KeyHolder keyHolder1 = new GeneratedKeyHolder();
+        KeyHolder keyHolder2 = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
 
-            statement.setInt(1, userId);
-            statement.setInt(2, apiId);
+            statement.setInt(1, apiId);
+            statement.setInt(2, userId);
+            statement.setString(3, title);
+            statement.setString(4, image);
 
             return statement;
-        }, keyHolder);
+        }, keyHolder2);
 
-        int newId = keyHolder.getKey().intValue();
+        int newId2 = keyHolder2.getKey().intValue();
 
-        return newId;
+        jdbcTemplate.update(connection -> {
+            PreparedStatement statement = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setInt(1, userId);
+            statement.setInt(2, newId2);
+
+            return statement;
+        }, keyHolder1);
+
+        int newId1 = keyHolder1.getKey().intValue();
+
+        keys[0] = newId1;
+        keys[1] = newId2;
+
+        return keys;
+    }
+
+    public boolean checkExistingRecipe(int userId, int apiId)
+    {
+        String sql = """
+                SELECT *
+                FROM external_recipes
+                WHERE api_id = ? AND user_id = ?;
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql, apiId, userId);
+
+        if (row.next()) return true;
+        else return false;
     }
 
     public List<RecipeSearch> getUserLibrary(int userId)
@@ -65,8 +102,15 @@ public class MySqlRecipeListDao
             String title = row.getString("title");
             String image = row.getString("image");
             int id = row.getInt("id");
+            boolean isCustom = row.getBoolean("is_custom");
 
-            library.add(new RecipeSearch(title, image, id, userId));
+            int databaseId;
+            if (isCustom) databaseId = row.getInt("custom_id");
+            else databaseId = row.getInt("api_id");
+
+
+
+            library.add(new RecipeSearch(title, image, id, userId, isCustom, databaseId));
         }
         return library;
     }

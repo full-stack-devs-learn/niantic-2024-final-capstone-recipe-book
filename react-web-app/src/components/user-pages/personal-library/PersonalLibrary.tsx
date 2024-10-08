@@ -19,8 +19,11 @@ export default function PersonalLibrary()
 
     async function getLibrary()
     {
+        // internal API call
         const libraryItems = await recipesListService.getUserLibrary();
         setLibrary(libraryItems);
+
+        // external API call
     }
 
     return (

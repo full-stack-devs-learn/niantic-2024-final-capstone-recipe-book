@@ -2,6 +2,7 @@ package com.niantic.controllers;
 
 import com.niantic.data.MySqlRecipeListDao;
 import com.niantic.data.UserDao;
+import com.niantic.models.ExternalRecipeCard;
 import com.niantic.models.RecipeSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,11 +40,16 @@ public class RecipeListController
 
     @PostMapping("add")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<?> addRecipeFromExternalAPI(Principal principal, @RequestBody Integer recipeId)
+    public ResponseEntity<?> addRecipeFromExternalAPI(Principal principal, @RequestBody ExternalRecipeCard recipeCard)
     {
         int userId = userDao.getIdByUsername(principal.getName());
-        int body = recipeListDao.addRecipeFromExternalAPI(userId, recipeId);
 
+        if (recipeListDao.checkExistingRecipe(userId, recipeCard.getApiId()))
+        {
+            return ResponseEntity.ok("This recipe has already been added.");
+        }
+
+        int[] body = recipeListDao.addRecipeFromExternalAPI(userId, recipeCard.getApiId(), recipeCard.getTitle(), recipeCard.getImage());
         return ResponseEntity.ok(body);
     }
 }
