@@ -26,10 +26,9 @@ class RecipesListService
         
     }
 
-
-    async addRecipeFromExternalAPI(id: number)
+    async addRecipeFromExternalAPI(externalRecipe: object)
     {
-        const response = await axios.post<number>(`${this.baseUrl}/api/recipe-list/add`, id, this.createHeaders());
+        const response = await axios.post<number>(`${this.baseUrl}/api/recipe-list/add`, externalRecipe, this.createHeaders());
         return response.data;
     }
 

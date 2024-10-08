@@ -26,7 +26,12 @@ export default function RecipeDetails()
 
     function addRecipeToLibrary()
     {
-        recipesListService.addRecipeFromExternalAPI(+id)
+        const addRecipe = {
+            apiId: +id,
+            title: recipeData?.title,
+            image: recipeData?.image    
+        }
+        recipesListService.addRecipeFromExternalAPI(addRecipe)
     }
     
     return (

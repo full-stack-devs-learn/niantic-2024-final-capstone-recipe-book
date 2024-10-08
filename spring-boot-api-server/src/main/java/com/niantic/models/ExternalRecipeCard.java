@@ -9,12 +9,9 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeSearch {
-
+public class ExternalRecipeCard
+{
+    private int apiId;
     private String title;
     private String image;
-    private int id;
-    private int userId;
-    private boolean isCustom;
-    private int databaseId;
 }
