@@ -34,12 +34,12 @@ CREATE TABLE custom_recipes (
 );   
 
 CREATE TABLE recipes_list (
-						recipe_id INT NOT NULL AUTO_INCREMENT,
+						id INT NOT NULL AUTO_INCREMENT,
                         user_id INT NOT NULL,
                         is_custom BOOLEAN NOT NULL DEFAULT FALSE,
                         custom_id INT,
                         api_id INT,
-                        PRIMARY KEY (recipe_id),
+                        PRIMARY KEY (id),
                         FOREIGN KEY(user_id) REFERENCES users(user_id),
                         FOREIGN KEY(custom_id) REFERENCES custom_recipes(custom_id)
 				);                     

@@ -7,13 +7,12 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class RecipeListModel
-{
+@NoArgsConstructor
+public class RecipeSearch {
+
+    private String title;
+    private String image;
     private int id;
     private int userId;
-    private boolean isCustom;
-    private int customid;
-    private int apiId;
 }
