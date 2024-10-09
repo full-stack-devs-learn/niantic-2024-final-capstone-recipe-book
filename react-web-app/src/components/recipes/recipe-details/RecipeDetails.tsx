@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import recipesListService from "../../../services/recipes-list-service";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import { LibraryRecipeCard } from "../../../models/personal-library/library-recipe-card";
 
 export default function RecipeDetails() {
     const [recipeData, setRecipeData] = useState<Recipe>();
@@ -15,6 +16,7 @@ export default function RecipeDetails() {
     const [instructions, setInstructions] = useState<string>('');
     const [action, setAction] = useState<string>('');
     const { user } = useSelector((state: RootState) => state.authentication)
+    const [userExternalLibrary, setUserExternalLibrary] = useState<any[]>([])
 
 
     const params = useParams();
@@ -32,15 +34,29 @@ export default function RecipeDetails() {
     }, [action])
 
     async function getRecipe() {
+
+        setUserExternalLibrary((await recipesListService.getUserLibrary())
+                                    .filter((card: LibraryRecipeCard) => !card.isCustom)
+                                    .map((card: LibraryRecipeCard) =>[card.externalId, card.apiId]))
+        console.log('userExternalLibrary', userExternalLibrary)
         if (+custom == 0) {
             const selectedRecipe = await spoonacularService.getRecipeById(+id);
             setRecipeData(selectedRecipe);
-            
+            if (userExternalLibrary.includes([selectedRecipe!.id, +id]))
+            {
+                setAction('delete')
+                console.log('load delete', action)
+            }
+            else
+            {
+                setAction('add')
+                console.log('load add', action)
+            }
         }
         else {
             const selectedCustomRecipe = await recipesListService.getCustomRecipeById(+id)
             setCustomRecipeData(selectedCustomRecipe);
-        } 
+        }
     }
 
     async function editCustomRecipe(event: FormEvent)
@@ -81,6 +97,27 @@ export default function RecipeDetails() {
             image: recipeData?.image
         }
         recipesListService.addRecipeFromExternalAPI(addRecipe)
+        setAction('delete')
+        console.log('add recipe to library', action)
+    }
+
+    function deleteExternalRecipe(event: FormEvent) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        let externalId = 0;
+        userExternalLibrary.forEach(
+            (item: number[]) => {
+                if (item[1] === +id){
+                externalId = item[0]
+            }})
+                
+        recipesListService.deleteExternalRecipe(externalId, +id)
+
+        setAction('add')
+        console.log('external recipe delete', action)
+        console.log('external id', externalId)
+        console.log('api id', +id)
     }
 
     return (
@@ -151,7 +188,11 @@ export default function RecipeDetails() {
                             </div>
                         </div>
                     </>
-                    : <button className="btn btn-info" onClick={(e) => addRecipeToLibrary(e)}>Add Recipe to Library</button>
+                    : (action == 'add')
+                    ?
+                    <button className="btn btn-info" onClick={(e) => addRecipeToLibrary(e)}>Add Recipe to Library</button>
+                    :
+                    <button className="btn btn-danger" onClick={(e) => deleteExternalRecipe(e)}>Remove Recipe from Library</button>
             }
             <h5>Instructions</h5>
             <p>{+custom ? customRecipeData?.instructions : recipeData?.instructions}</p>

@@ -91,18 +91,19 @@ public class MySqlRecipeListDao
 
         String sql = """
                 SELECT
-                    r.id
-                    , r.is_custom
-                    , r.custom_id
-                    , e.api_id
-                    , c.title AS custom_title
-                    , e.title AS external_title
-                    , c.image AS custom_image
-                    , e.image AS external_image
-                FROM recipes_list as r
-                LEFT JOIN custom_recipes as c ON r.user_id = c.user_id and r.custom_id = c.id and r.is_custom = 1
-                LEFT JOIN external_recipes e ON e.user_id=r.user_id and r.external_id = e.external_id and r.is_custom = 0
-                WHERE r.user_id = ?;
+                        r.id
+                        , r.is_custom
+                        , r.custom_id
+                        , e.api_id
+                        , c.title AS custom_title
+                        , e.title AS external_title
+                        , c.image AS custom_image
+                        , e.image AS external_image
+                        , e.external_id AS external_id
+                    FROM recipes_list as r
+                    LEFT JOIN custom_recipes as c ON r.user_id = c.user_id and r.custom_id = c.id and r.is_custom = 1
+                    LEFT JOIN external_recipes e ON e.user_id=r.user_id and r.external_id = e.external_id and r.is_custom = 0
+                    WHERE r.user_id = ?;
                 """;
 
         var row = jdbcTemplate.queryForRowSet(sql, userId);
@@ -117,8 +118,9 @@ public class MySqlRecipeListDao
             String customImage = row.getString("custom_image");
             String externalImage = row.getString("external_image");
             int id = row.getInt("id");
+            int externalId = row.getInt("external_id");
 
-            library.add(new RecipeSearch(id, userId, isCustom, customId, apiId, customTitle, externalTitle, customImage, externalImage));
+            library.add(new RecipeSearch(id, userId, isCustom, customId, apiId, customTitle, externalTitle, customImage, externalImage, externalId));
         }
         return library;
     }
@@ -219,5 +221,20 @@ public class MySqlRecipeListDao
                 """;
 
         jdbcTemplate.update(sql, recipeId);
+    }
+
+    public void deleteExternalRecipe(int externalId, int apiId)
+    {
+        String sql = """
+                DELETE FROM recipes_list
+                WHERE external_id = ?;
+                """;
+        jdbcTemplate.update(sql, externalId);
+
+        String sql2 = """
+                DELETE FROM external_recipes
+                WHERE api_id = ?;
+                """;
+        jdbcTemplate.update(sql2, apiId);
     }
 }

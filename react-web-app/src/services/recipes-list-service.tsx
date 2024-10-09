@@ -60,7 +60,12 @@ class RecipesListService
 
     async deleteCustomRecipe(id: number)
     {
-        await axios.delete<void>(`${this.baseUrl}/api/recipe-list/delete-recipe/${id}`, this.createHeaders());
+        await axios.delete<void>(`${this.baseUrl}/api/recipe-list/delete-custom-recipe/${id}`, this.createHeaders());
+    }
+
+    async deleteExternalRecipe(externalId: number, apiId: number)
+    {
+        await axios.delete<void>(`${this.baseUrl}/api/recipe-list/delete-external-recipe/${externalId}/${apiId}`, this.createHeaders());
     }
 
 }
