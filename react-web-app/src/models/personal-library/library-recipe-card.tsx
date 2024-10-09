@@ -9,4 +9,5 @@ export class LibraryRecipeCard
     externalTitle!: string;
     customImage!: string;
     externalImage!: string;
+    externalId?: number;
 }

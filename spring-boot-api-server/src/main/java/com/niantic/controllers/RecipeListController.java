@@ -82,11 +82,20 @@ public class RecipeListController
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("delete-recipe/{id}")
+    @DeleteMapping("delete-custom-recipe/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> deleteCustomRecipe(Principal principal, @PathVariable int id)
     {
         recipeListDao.deleteCustomRecipe(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("delete-external-recipe/{externalId}/{apiId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> deleteExternalRecipe(Principal principal, @PathVariable int externalId, @PathVariable int apiId)
+    {
+        recipeListDao.deleteExternalRecipe(externalId, apiId);
 
         return ResponseEntity.ok().build();
     }
