@@ -25,8 +25,6 @@ export default function RecipeDetails() {
     const id = params.id ?? 0;
     const custom = params.isCustom ?? 0;
 
-    console.log(custom, " details")
-
     useEffect(() => {
 
         getRecipe();
@@ -38,19 +36,16 @@ export default function RecipeDetails() {
         setUserExternalLibrary((await recipesListService.getUserLibrary())
                                     .filter((card: LibraryRecipeCard) => !card.isCustom)
                                     .map((card: LibraryRecipeCard) =>[card.externalId, card.apiId]))
-        console.log('userExternalLibrary', userExternalLibrary)
         if (+custom == 0) {
             const selectedRecipe = await spoonacularService.getRecipeById(+id);
             setRecipeData(selectedRecipe);
             if (userExternalLibrary.includes([selectedRecipe!.id, +id]))
             {
                 setAction('delete')
-                console.log('load delete', action)
             }
             else
             {
                 setAction('add')
-                console.log('load add', action)
             }
         }
         else {
@@ -98,7 +93,6 @@ export default function RecipeDetails() {
         }
         recipesListService.addRecipeFromExternalAPI(addRecipe)
         setAction('delete')
-        console.log('add recipe to library', action)
     }
 
     function deleteExternalRecipe(event: FormEvent) {
@@ -115,9 +109,6 @@ export default function RecipeDetails() {
         recipesListService.deleteExternalRecipe(externalId, +id)
 
         setAction('add')
-        console.log('external recipe delete', action)
-        console.log('external id', externalId)
-        console.log('api id', +id)
     }
 
     return (

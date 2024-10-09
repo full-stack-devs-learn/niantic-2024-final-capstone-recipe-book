@@ -30,19 +30,26 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
         {
             str = str + cuisine;
         }
+
+        if (totalTime)
+        {
+            str = str + totalTime;
+        }
         
         props.onFiltered(str);
     }
 
     useEffect(() => {
         buildQueryString();
-    }, [diet, intolerances, cuisine])
+    }, [diet, intolerances, cuisine, totalTime])
 
     return (
         <aside>
             <h3>Filters</h3>
 
-            <TotalTime />
+            <TotalTime onTotalTimeApply={(totalTimeString: string) => {
+                    setTotalTime(totalTimeString);
+                }} />
 
 
             <div className="accordion" id="accordionExample">
@@ -58,8 +65,6 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
                     setIntolerances(intoleranceString);
                 }}/>
             </div>
-
-            <button className="submit btn btn-outline-primary">Submit</button>
         </aside>
     )
 }
