@@ -1,7 +1,7 @@
 import RecipeCard from "../../recipes/recipe-card/RecipeCard";
 import recipesListService from "../../../services/recipes-list-service";
 import spoonacularService from "../../../services/spoonacular-service";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { LibraryRecipeCard } from "../../../models/personal-library/library-recipe-card";
 
 export default function PersonalLibrary() {
@@ -9,21 +9,39 @@ export default function PersonalLibrary() {
     const lastName = 'Dzierzon';
 
     const [library, setLibrary] = useState<LibraryRecipeCard[]>([]);
+    const [title, setTitle] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState<string>('');
+    const [ingredients, setIngredients] = useState<string>('');
+    const [instructions, setInstructions] = useState<string>('');
+    const [action, setAction] = useState<string>('');
 
     useEffect(() => {
 
+        // HOW TO REFRESH WHEN ACTION CHANGES & ID TO RECIPE DETAILS IS STILL NOT WORKING
         getLibrary();
 
-    }, [])
+    }, [action])
 
     async function getLibrary() {
-        // internal API call
         const libraryItems = await recipesListService.getUserLibrary();
 
         setLibrary(libraryItems);
+    }
 
-        // external API call
+    function addCustomRecipe(event: FormEvent)
+    {
+        event.preventDefault();
 
+        const newRecipe = {
+            title: title,
+            image: imageUrl,
+            instructions: instructions,
+            ingredients: ingredients
+        }
+
+        recipesListService.addCustomRecipe(newRecipe);
+
+        setAction(newRecipe.title + newRecipe.ingredients);
     }
 
     return (
@@ -44,30 +62,30 @@ export default function PersonalLibrary() {
                                     <span aria-hidden="true"></span>
                                 </button>
                             </div>
+                            <form>
                             <div className="modal-body">
-                                <form>
                                     <div>
                                         <label className="form-label" htmlFor="title">Title</label>
-                                        <input className="form-control border-primary" type="text" name="title" id="title" />
+                                        <input className="form-control border-primary" type="text" name="title" id="title" onChange={(e) => setTitle(e.target.value)} />
                                     </div>
                                     <div>
                                         <label className="form-label" htmlFor="title">Image URL</label>
-                                        <input className="form-control border-warning" type="text" name="title" id="title" disabled />
+                                        <input className="form-control border-warning" type="text" name="title" id="title" onChange={(e) => setImageUrl(e.target.value)} disabled />
                                     </div>
                                     <div>
                                         <label className="form-label" htmlFor="title">Ingredients</label>
-                                        <textarea className="form-control border-primary" name="title" id="title" />
+                                        <textarea className="form-control border-primary" name="title" id="title" onChange={(e) => setIngredients(e.target.value)} />
                                     </div>
                                     <div>
                                         <label className="form-label" htmlFor="title">Instructions</label>
-                                        <textarea className="form-control border-primary" name="title" id="title" />
+                                        <textarea className="form-control border-primary" name="title" id="title" onChange={(e) => setInstructions(e.target.value)} />
                                     </div>
-                                </form>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-primary">Save Recipe</button>
+                                <button type="submit" className="btn btn-primary" onClick={(e) => addCustomRecipe(e)} data-bs-dismiss="modal">Save Recipe</button>
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

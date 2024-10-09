@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CustomRecipe {
     @JsonProperty("id")
-    private int custom_id;
-    private int user_id;
+    private int customId;
+    private int userId;
     private String title;
     private String image;
     private String instructions;
