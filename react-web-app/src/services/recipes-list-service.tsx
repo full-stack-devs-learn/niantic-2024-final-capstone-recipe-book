@@ -53,6 +53,16 @@ class RecipesListService
         return response.data;
     }
 
+    async editCustomRecipe(recipe: any)
+    {
+        await axios.put<void>(`${this.baseUrl}/api/recipe-list/edit-recipe/${recipe.id}`, recipe, this.createHeaders());
+    }
+
+    async deleteCustomRecipe(recipe: Recipe)
+    {
+        await axios.delete<void>(`${this.baseUrl}/api/recipe-list/delete-recipe/${recipe.id}`, this.createHeaders());
+    }
+
 }
 
 const recipesListService = new RecipesListService();
