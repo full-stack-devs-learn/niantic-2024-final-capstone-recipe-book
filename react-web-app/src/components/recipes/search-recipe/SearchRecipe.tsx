@@ -33,14 +33,11 @@ export default function SearchRecipe() {
     {
         setFilter(filterStr);
         setAction(search + filterStr);
-
-        console.log("BUILD FILTER", action, "Filter", filterStr)
     }
 
     function buildSearch(searchStr: string)
     {
         setSearch("&query=" + searchStr);
-        console.log("BUILD SEARCH", action)
     }
 
     return (
