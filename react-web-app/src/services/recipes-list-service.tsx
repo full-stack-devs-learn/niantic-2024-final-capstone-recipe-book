@@ -58,9 +58,9 @@ class RecipesListService
         await axios.put<void>(`${this.baseUrl}/api/recipe-list/edit-recipe/${recipe.id}`, recipe, this.createHeaders());
     }
 
-    async deleteCustomRecipe(recipe: Recipe)
+    async deleteCustomRecipe(id: number)
     {
-        await axios.delete<void>(`${this.baseUrl}/api/recipe-list/delete-recipe/${recipe.id}`, this.createHeaders());
+        await axios.delete<void>(`${this.baseUrl}/api/recipe-list/delete-recipe/${id}`, this.createHeaders());
     }
 
 }

@@ -1,8 +1,10 @@
 import { useState, useEffect, FormEvent } from "react";
 import spoonacularService from "../../../services/spoonacular-service";
 import { Recipe } from "../../../models/recipe";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import recipesListService from "../../../services/recipes-list-service";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 export default function RecipeDetails() {
     const [recipeData, setRecipeData] = useState<Recipe>();
@@ -12,9 +14,11 @@ export default function RecipeDetails() {
     const [ingredients, setIngredients] = useState<string>('');
     const [instructions, setInstructions] = useState<string>('');
     const [action, setAction] = useState<string>('');
+    const { user } = useSelector((state: RootState) => state.authentication)
 
 
     const params = useParams();
+    const navigate = useNavigate();
 
     const id = params.id ?? 0;
     const custom = params.isCustom ?? 0;
@@ -54,6 +58,16 @@ export default function RecipeDetails() {
         await recipesListService.editCustomRecipe(newRecipe);
 
         setAction(newRecipe.title + newRecipe.ingredients);
+
+    }
+
+    async function deleteCustomRecipe(event: FormEvent)
+    {
+        event.preventDefault();
+
+        await recipesListService.deleteCustomRecipe(+id);
+
+        navigate(`/user/${user?.id}/library`);
 
     }
 
@@ -110,6 +124,29 @@ export default function RecipeDetails() {
                                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         </div>
                                     </form> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <button className="btn btn-info" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Recipe</button>
+                        <div className="modal fade" id="deleteModal" tabIndex={-1} role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div className="modal-dialog" role="document">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title">Delete Recipe</h5>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    
+                                        <div className="modal-body">
+                                            <p>WARNING! Deleting a custom recipe is permanent.</p>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="submit" className="btn btn-primary" onClick={(e) => deleteCustomRecipe(e)} data-bs-dismiss="modal">Delete Recipe</button>
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+
                                 </div>
                             </div>
                         </div>
