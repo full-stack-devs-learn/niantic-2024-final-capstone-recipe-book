@@ -17,7 +17,7 @@ export default function PersonalLibrary() {
 
     useEffect(() => {
 
-        // HOW TO REFRESH WHEN ACTION CHANGES & ID TO RECIPE DETAILS IS STILL NOT WORKING
+        // HOW TO REFRESH WHEN ACTION CHANGES
         getLibrary();
 
     }, [action])
@@ -49,8 +49,6 @@ export default function PersonalLibrary() {
             <h3>{firstName} {lastName}'s Personal Library</h3>
 
             <main className="container">
-
-                <div>Preview Recipe Cards Here</div>
 
                 <button className="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

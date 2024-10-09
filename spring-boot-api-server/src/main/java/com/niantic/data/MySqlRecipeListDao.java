@@ -91,17 +91,17 @@ public class MySqlRecipeListDao
 
         String sql = """
                 SELECT
-                	r.id
-                	, r.is_custom
+                    r.id
+                    , r.is_custom
                     , r.custom_id
                     , e.api_id
                     , c.title AS custom_title
                     , e.title AS external_title
                     , c.image AS custom_image
-                	, e.image AS external_image
+                    , e.image AS external_image
                 FROM recipes_list as r
-                LEFT JOIN custom_recipes as c ON r.user_id=c.user_id and r.is_custom = 1
-                LEFT JOIN external_recipes e ON e.user_id=r.user_id and r.is_custom = 0
+                LEFT JOIN custom_recipes as c ON r.user_id = c.user_id and r.custom_id = c.id and r.is_custom = 1
+                LEFT JOIN external_recipes e ON e.user_id=r.user_id and r.external_id = e.external_id and r.is_custom = 0
                 WHERE r.user_id = ?;
                 """;
 
