@@ -207,6 +207,12 @@ public class MySqlRecipeListDao
 
     public void deleteCustomRecipe(int recipeId)
     {
+        String sql2 = """
+                DELETE FROM recipes_list
+                WHERE custom_id = ?;
+                """;
+        jdbcTemplate.update(sql2, recipeId);
+
         String sql = """
                 DELETE FROM custom_recipes
                 WHERE id = ?;
