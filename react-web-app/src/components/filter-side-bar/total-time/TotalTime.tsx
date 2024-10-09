@@ -1,5 +1,4 @@
-import React, { FormEvent, useState } from 'react';
-import RangeSlider from 'react-bootstrap-range-slider';
+import { FormEvent, useState } from 'react';
 
 export default function TotalTime(props: {onTotalTimeApply: any}) {
 

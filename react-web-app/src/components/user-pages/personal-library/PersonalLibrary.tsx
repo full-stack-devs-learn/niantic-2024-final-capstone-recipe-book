@@ -9,15 +9,16 @@ export default function PersonalLibrary() {
     const lastName = 'Dzierzon';
 
     const [library, setLibrary] = useState<LibraryRecipeCard[]>([]);
+    const [filteredLibrary, setFilteredLibrary] = useState<LibraryRecipeCard[]>([]);
     const [title, setTitle] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
     const [ingredients, setIngredients] = useState<string>('');
     const [instructions, setInstructions] = useState<string>('');
     const [action, setAction] = useState<string>('');
+    const [search, setSearch] = useState<string>('');
 
     useEffect(() => {
 
-        // HOW TO REFRESH WHEN ACTION CHANGES
         getLibrary();
 
     }, [action])
@@ -43,6 +44,16 @@ export default function PersonalLibrary() {
 
         setAction(newRecipe.title + newRecipe.ingredients);
 
+    }
+
+    async function onSearch(event: FormEvent)
+    {
+        event?.preventDefault()
+        const searchLibrary = library.filter((recipe: LibraryRecipeCard) => 
+            (recipe.isCustom && recipe.customTitle?.toLowerCase().includes(search.toLowerCase())) || (recipe.externalTitle?.toLowerCase().includes(search.toLowerCase()))
+        )
+        setFilteredLibrary(searchLibrary)
+        setAction('search')
     }
 
     return (
@@ -90,15 +101,25 @@ export default function PersonalLibrary() {
                 </div>
 
                 <form className="d-flex" >
-                    <input type="text" className="form-control me-sm-2" placeholder="Search" />
-                    <button type="submit" className="btn btn-secondary my-2 my-sm-0">Search</button>
+                    <input type="text" className="form-control me-sm-2" placeholder="Search" onChange={(e) => setSearch(e.target.value)}/>
+                    <button type="submit" className="btn btn-secondary my-2 my-sm-0" onClick={(e) => onSearch(e)}>Search</button>
                 </form>
 
                 {
+                    filteredLibrary.length == 0 
+                    ?
                     library.map((recipe) => (
                         <RecipeCard key={recipe.id}
                             isCustom={recipe.isCustom}
-                            title={recipe.isCustom ? recipe.customTitle : recipe.externalTitle}
+                            title={recipe.isCustom ? recipe.customTitle! : recipe.externalTitle!}
+                            image={recipe.isCustom ? recipe.customImage : recipe.externalImage}
+                            id={recipe.isCustom ? recipe.customId : recipe.apiId} />
+                    ))
+                    : 
+                    filteredLibrary.map((recipe: LibraryRecipeCard) => (
+                        <RecipeCard key={recipe.id}
+                            isCustom={recipe.isCustom}
+                            title={recipe.isCustom ? recipe.customTitle! : recipe.externalTitle!}
                             image={recipe.isCustom ? recipe.customImage : recipe.externalImage}
                             id={recipe.isCustom ? recipe.customId : recipe.apiId} />
                     ))

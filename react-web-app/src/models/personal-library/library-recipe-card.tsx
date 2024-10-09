@@ -5,8 +5,8 @@ export class LibraryRecipeCard
     isCustom!: boolean;
     customId!: number;
     apiId!: number;
-    customTitle!: string;
-    externalTitle!: string;
+    customTitle?: string = '';
+    externalTitle?: string = '';
     customImage!: string;
     externalImage!: string;
     externalId?: number;

@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 
 export default function RecipeCard({ title, image, id, isCustom }: { title: string; image: string; id: number; isCustom: boolean }) {
 
-    console.log(+isCustom, "custom")
-    console.log(id, "id")
-
     return (
         <>
             {
