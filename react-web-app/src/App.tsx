@@ -30,7 +30,7 @@ function App() {
           <Route path=':id/details/:isCustom' element={<RecipeDetails />} />
         </Route>
 
-        <Route path='/user/1' element={<UserPage />}>
+        <Route path='/user/:id' element={<UserPage />}>
           <Route path='profile' element={<UserProfile />} />
           <Route path='library' element={<PersonalLibrary />} />
         </Route>
