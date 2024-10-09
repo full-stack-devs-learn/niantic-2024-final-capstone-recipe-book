@@ -28,7 +28,7 @@ export default function PersonalLibrary() {
         setLibrary(libraryItems);
     }
 
-    function addCustomRecipe(event: FormEvent)
+    async function addCustomRecipe(event: FormEvent)
     {
         event.preventDefault();
 
@@ -39,9 +39,10 @@ export default function PersonalLibrary() {
             ingredients: ingredients
         }
 
-        recipesListService.addCustomRecipe(newRecipe);
+        await recipesListService.addCustomRecipe(newRecipe);
 
         setAction(newRecipe.title + newRecipe.ingredients);
+
     }
 
     return (

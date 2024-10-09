@@ -72,4 +72,22 @@ public class RecipeListController
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
     }
+
+    @PutMapping("edit-recipe/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> editCustomRecipe(Principal principal, @RequestBody CustomRecipe customRecipe, @PathVariable int id)
+    {
+        recipeListDao.editCustomRecipe(id, customRecipe);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("delete-recipe/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> deleteCustomRecipe(Principal principal, @PathVariable int id)
+    {
+        recipeListDao.deleteCustomRecipe(id);
+
+        return ResponseEntity.ok().build();
+    }
 }

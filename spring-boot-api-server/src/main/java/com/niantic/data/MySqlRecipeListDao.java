@@ -188,4 +188,30 @@ public class MySqlRecipeListDao
 
         return getCustomRecipeById(customId);
     }
+
+    public void editCustomRecipe(int recipeId, CustomRecipe customRecipe)
+    {
+        String sql = """
+                UPDATE custom_recipes
+                SET title = ?,
+                    image = ?,
+                    instructions = ?,
+                    ingredients = ?
+                WHERE id = ?;
+                """;
+
+        jdbcTemplate.update(sql, customRecipe.getTitle(), customRecipe.getImage(),
+                    customRecipe.getInstructions(), customRecipe.getIngredients(),
+                    recipeId);
+    }
+
+    public void deleteCustomRecipe(int recipeId)
+    {
+        String sql = """
+                DELETE FROM custom_recipes
+                WHERE id = ?;
+                """;
+
+        jdbcTemplate.update(sql, recipeId);
+    }
 }

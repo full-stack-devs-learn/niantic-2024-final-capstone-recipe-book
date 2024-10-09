@@ -14,7 +14,7 @@ export class Recipe
     dairyFree?: boolean;
     diets?: string[];
     glutenFree?: boolean;
-    extendedIngredients!: Ingredient[] | string;
+    extendedIngredients!: any;
     instructions!: string;
     ketogenic?: boolean;
     lowFodmap?: boolean;
