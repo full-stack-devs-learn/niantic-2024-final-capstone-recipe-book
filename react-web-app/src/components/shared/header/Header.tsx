@@ -30,7 +30,7 @@ export default function Header() {
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/recipes">Recipe Search</NavLink>
                         </li>
-                        <li className="nav-item dropdown">
+                        {isAuthenticated && <li className="nav-item dropdown">
                             <NavLink to="/user/1/profile" className="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="true">User</NavLink>
                             <div className="dropdown-menu">
                                 <Link className="dropdown-item" to="/user/1/profile">Profile</Link>
@@ -38,7 +38,7 @@ export default function Header() {
                                 <Link className="dropdown-item" to="/user/1/library">Library</Link>
                                 <Link className="dropdown-item" to="/user/1/profile">Meal Planner</Link>
                             </div>
-                        </li>
+                        </li>}
                     </ul>
                     <ul className="navbar-nav ms-auto" >
 
