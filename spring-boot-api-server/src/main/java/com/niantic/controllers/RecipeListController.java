@@ -6,6 +6,7 @@ import com.niantic.models.CustomRecipe;
 import com.niantic.models.ExternalRecipeCard;
 import com.niantic.models.RecipeSearch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -60,5 +61,15 @@ public class RecipeListController
 
         int[] body = recipeListDao.addRecipeFromExternalAPI(userId, recipeCard.getApiId(), recipeCard.getTitle(), recipeCard.getImage());
         return ResponseEntity.status(201).body(body);
+    }
+
+    @PostMapping("new-recipe")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> addCustomRecipe(Principal principal, @RequestBody CustomRecipe customRecipe)
+    {
+        int userId = userDao.getIdByUsername(principal.getName());
+        CustomRecipe newRecipe = recipeListDao.addCustomRecipe(userId, customRecipe);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
     }
 }

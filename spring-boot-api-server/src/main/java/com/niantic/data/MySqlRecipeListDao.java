@@ -143,4 +143,49 @@ public class MySqlRecipeListDao
         }
         return null;
     }
+
+    public CustomRecipe addCustomRecipe(int userId, CustomRecipe customRecipe)
+    {
+        String sql = """
+                INSERT INTO custom_recipes (user_id, title, image, instructions, ingredients)
+                VALUES (?, ?, ?, ?, ?);
+                """;
+
+        String sql2 = """
+                INSERT INTO recipes_list (user_id, is_custom, custom_id)
+                VALUES (?, ?, ?);
+                """;
+
+        // insert a new record and retrieve the generated id
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        KeyHolder keyHolder2 = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setInt(1, userId);
+            statement.setString(2, customRecipe.getTitle());
+            statement.setString(3, customRecipe.getImage());
+            statement.setString(4, customRecipe.getInstructions());
+            statement.setString(5, customRecipe.getIngredients());
+
+            return statement;
+        }, keyHolder);
+
+        int customId = keyHolder.getKey().intValue();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement statement = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setInt(1, userId);
+            statement.setBoolean(2, true);
+            statement.setInt(3, customId);
+
+            return statement;
+        }, keyHolder2);
+
+        int newId2 = keyHolder2.getKey().intValue();
+
+        return getCustomRecipeById(customId);
+    }
 }

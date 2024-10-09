@@ -23,4 +23,6 @@ public class RecipeSearch {
     private String externalTitle;
     private String customImage;
     private String externalImage;
+
+    public boolean getIsCustom() {return this.isCustom;}
 }

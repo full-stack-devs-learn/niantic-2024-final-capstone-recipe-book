@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import store, { RootState } from "../store/store";
 import { Recipe } from "../models/recipe";
 import { LibraryRecipeCard } from "../models/personal-library/library-recipe-card";
+import { CustomRecipe } from "../models/personal-library/custom-recipe";
 
 class RecipesListService
 {
@@ -43,6 +44,12 @@ class RecipesListService
     async getCustomRecipeById(id: number)
     {
         const response = await axios.get<Recipe>(`${this.baseUrl}/api/recipe-list/custom/${id}`, this.createHeaders());
+        return response.data;
+    }
+
+    async addCustomRecipe(recipe: object)
+    {
+        const response = await axios.post<CustomRecipe>(`${this.baseUrl}/api/recipe-list/new-recipe`, recipe, this.createHeaders());
         return response.data;
     }
 
