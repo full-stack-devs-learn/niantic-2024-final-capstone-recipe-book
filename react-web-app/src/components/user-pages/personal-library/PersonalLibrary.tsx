@@ -1,6 +1,5 @@
 import RecipeCard from "../../recipes/recipe-card/RecipeCard";
 import recipesListService from "../../../services/recipes-list-service";
-import spoonacularService from "../../../services/spoonacular-service";
 import { FormEvent, useEffect, useState } from "react";
 import { LibraryRecipeCard } from "../../../models/personal-library/library-recipe-card";
 
@@ -20,6 +19,7 @@ export default function PersonalLibrary() {
     useEffect(() => {
 
         getLibrary();
+        setSearch('')
 
     }, [action])
 
@@ -42,7 +42,13 @@ export default function PersonalLibrary() {
 
         await recipesListService.addCustomRecipe(newRecipe);
 
-        setAction(newRecipe.title + newRecipe.ingredients);
+        setFilteredLibrary([])
+        setTitle('')
+        setInstructions('')
+        setIngredients('')
+        setImageUrl('')
+        setAction(newRecipe.title + newRecipe.ingredients)
+        
 
     }
 
@@ -76,19 +82,19 @@ export default function PersonalLibrary() {
                             <div className="modal-body">
                                     <div>
                                         <label className="form-label" htmlFor="title">Title</label>
-                                        <input className="form-control border-primary" type="text" name="title" id="title" onChange={(e) => setTitle(e.target.value)} />
+                                        <input className="form-control border-primary" type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
                                     </div>
                                     <div>
                                         <label className="form-label" htmlFor="title">Image URL</label>
-                                        <input className="form-control border-warning" type="text" name="title" id="title" onChange={(e) => setImageUrl(e.target.value)} disabled />
+                                        <input className="form-control border-warning" type="text" name="title" id="title" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} disabled />
                                     </div>
                                     <div>
                                         <label className="form-label" htmlFor="title">Ingredients</label>
-                                        <textarea className="form-control border-primary" name="title" id="title" onChange={(e) => setIngredients(e.target.value)} />
+                                        <textarea className="form-control border-primary" name="title" id="title" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
                                     </div>
                                     <div>
                                         <label className="form-label" htmlFor="title">Instructions</label>
-                                        <textarea className="form-control border-primary" name="title" id="title" onChange={(e) => setInstructions(e.target.value)} />
+                                        <textarea className="form-control border-primary" name="title" id="title"  value={instructions} onChange={(e) => setInstructions(e.target.value)} />
                                     </div>
                             </div>
                             <div className="modal-footer">
@@ -101,7 +107,7 @@ export default function PersonalLibrary() {
                 </div>
 
                 <form className="d-flex" >
-                    <input type="text" className="form-control me-sm-2" placeholder="Search" onChange={(e) => setSearch(e.target.value)}/>
+                    <input type="text" className="form-control me-sm-2" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)}/>
                     <button type="submit" className="btn btn-secondary my-2 my-sm-0" onClick={(e) => onSearch(e)}>Search</button>
                 </form>
 
