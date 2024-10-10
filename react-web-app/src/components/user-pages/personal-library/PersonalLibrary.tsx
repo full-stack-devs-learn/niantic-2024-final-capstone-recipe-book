@@ -29,8 +29,7 @@ export default function PersonalLibrary() {
         setLibrary(libraryItems);
     }
 
-    async function addCustomRecipe(event: FormEvent)
-    {
+    async function addCustomRecipe(event: FormEvent) {
         event.preventDefault();
 
         const newRecipe = {
@@ -48,14 +47,13 @@ export default function PersonalLibrary() {
         setIngredients('')
         setImageUrl('')
         setAction(newRecipe.title + newRecipe.extendedIngredients)
-        
+
 
     }
 
-    async function onSearch(event: FormEvent)
-    {
+    async function onSearch(event: FormEvent) {
         event?.preventDefault()
-        const searchLibrary = library.filter((recipe: LibraryRecipeCard) => 
+        const searchLibrary = library.filter((recipe: LibraryRecipeCard) =>
             (recipe.isCustom && recipe.customTitle?.toLowerCase().includes(search.toLowerCase())) || (recipe.externalTitle?.toLowerCase().includes(search.toLowerCase()))
         )
         setFilteredLibrary(searchLibrary)
@@ -80,7 +78,7 @@ export default function PersonalLibrary() {
                                 </button>
                             </div>
                             <form>
-                            <div className="modal-body">
+                                <div className="modal-body">
                                     <div>
                                         <label className="form-label" htmlFor="title">Title</label>
                                         <input className="form-control border-primary" type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -90,46 +88,54 @@ export default function PersonalLibrary() {
                                         <input className="form-control border-warning" type="text" name="title" id="title" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} disabled />
                                     </div>
                                     <div>
+                                        <div className="alert alert-info">
+                                            <p className="alert-heading">Please format your ingredients into a list.</p>
+                                            <p className="mb-0">
+                                                Example <br />
+                                                1. 3 Cups of Flour <br />
+                                                2. 5 Tbs of Sugar
+                                            </p>
+                                        </div>
                                         <label className="form-label" htmlFor="title">Ingredients</label>
                                         <textarea className="form-control border-primary" name="title" id="title" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
                                     </div>
                                     <div>
                                         <label className="form-label" htmlFor="title">Instructions</label>
-                                        <textarea className="form-control border-primary" name="title" id="title"  value={instructions} onChange={(e) => setInstructions(e.target.value)} />
+                                        <textarea className="form-control border-primary" name="title" id="title" value={instructions} onChange={(e) => setInstructions(e.target.value)} />
                                     </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="submit" className="btn btn-primary" onClick={(e) => addCustomRecipe(e)} data-bs-dismiss="modal">Save Recipe</button>
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="submit" className="btn btn-primary" onClick={(e) => addCustomRecipe(e)} data-bs-dismiss="modal">Save Recipe</button>
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
 
                 <form className="d-flex" >
-                    <input type="text" className="form-control me-sm-2" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)}/>
+                    <input type="text" className="form-control me-sm-2" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                     <button type="submit" className="btn btn-secondary my-2 my-sm-0" onClick={(e) => onSearch(e)}>Search</button>
                 </form>
 
                 {
-                    filteredLibrary.length == 0 
-                    ?
-                    library.map((recipe) => (
-                        <RecipeCard key={recipe.id}
-                            isCustom={recipe.isCustom}
-                            title={recipe.isCustom ? recipe.customTitle! : recipe.externalTitle!}
-                            image={recipe.isCustom ? recipe.customImage : recipe.externalImage}
-                            id={recipe.isCustom ? recipe.customId : recipe.apiId} />
-                    ))
-                    : 
-                    filteredLibrary.map((recipe: LibraryRecipeCard) => (
-                        <RecipeCard key={recipe.id}
-                            isCustom={recipe.isCustom}
-                            title={recipe.isCustom ? recipe.customTitle! : recipe.externalTitle!}
-                            image={recipe.isCustom ? recipe.customImage : recipe.externalImage}
-                            id={recipe.isCustom ? recipe.customId : recipe.apiId} />
-                    ))
+                    filteredLibrary.length == 0
+                        ?
+                        library.map((recipe) => (
+                            <RecipeCard key={recipe.id}
+                                isCustom={recipe.isCustom}
+                                title={recipe.isCustom ? recipe.customTitle! : recipe.externalTitle!}
+                                image={recipe.isCustom ? recipe.customImage : recipe.externalImage}
+                                id={recipe.isCustom ? recipe.customId : recipe.apiId} />
+                        ))
+                        :
+                        filteredLibrary.map((recipe: LibraryRecipeCard) => (
+                            <RecipeCard key={recipe.id}
+                                isCustom={recipe.isCustom}
+                                title={recipe.isCustom ? recipe.customTitle! : recipe.externalTitle!}
+                                image={recipe.isCustom ? recipe.customImage : recipe.externalImage}
+                                id={recipe.isCustom ? recipe.customId : recipe.apiId} />
+                        ))
                 }
             </main>
         </>
