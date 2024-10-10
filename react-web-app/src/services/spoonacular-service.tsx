@@ -9,7 +9,6 @@ class SpoonacularService
     async getRecipesByUserInput(query: string) 
     {
         const response = await axios.get<SearchRecipe>(`${this.baseUrl}/complexSearch?apiKey=${import.meta.env.VITE_API_KEY}&${query}`);
-        console.log("URL ", query)
         return response.data;
     }
 
