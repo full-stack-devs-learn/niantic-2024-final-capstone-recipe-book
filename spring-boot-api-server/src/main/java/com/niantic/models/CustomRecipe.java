@@ -17,5 +17,5 @@ public class CustomRecipe {
     private String title;
     private String image;
     private String instructions;
-    private String ingredients;
+    private String extendedIngredients;
 }

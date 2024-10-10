@@ -16,6 +16,8 @@ export default function PersonalLibrary() {
     const [action, setAction] = useState<string>('');
     const [search, setSearch] = useState<string>('');
 
+    const [listIngredients, setListIngredients] = useState<string>('');
+
     useEffect(() => {
 
         getLibrary();
@@ -37,7 +39,7 @@ export default function PersonalLibrary() {
             title: title,
             image: imageUrl,
             instructions: instructions,
-            ingredients: ingredients
+            extendedIngredients: ingredients
         }
 
         await recipesListService.addCustomRecipe(newRecipe);
@@ -47,7 +49,7 @@ export default function PersonalLibrary() {
         setInstructions('')
         setIngredients('')
         setImageUrl('')
-        setAction(newRecipe.title + newRecipe.ingredients)
+        setAction(newRecipe.title + newRecipe.extendedIngredients)
         
 
     }
@@ -61,6 +63,22 @@ export default function PersonalLibrary() {
         setFilteredLibrary(searchLibrary)
         setAction('search')
     }
+
+    // function handleKeyDown(event: any)
+    // {
+    //     if (event.key === "Enter")
+    //     {
+    //         event.preventDefault();
+    //         const cursorPosition: number = event.target.selectionStart;
+    //         const newText: string = listIngredients.substring(0, cursorPosition) + '/n•' + listIngredients.substring(cursorPosition);
+    //         setListIngredients(newText);
+
+    //         setTimeout(() => {
+    //             event.target.selectionStart = event.target.selectionEnd = cursorPosition + 3;
+    //         }, 0)
+            
+    //     }
+    // }
 
     return (
         <>
