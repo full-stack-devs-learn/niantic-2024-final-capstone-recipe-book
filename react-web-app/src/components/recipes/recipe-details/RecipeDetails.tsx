@@ -76,12 +76,12 @@ export default function RecipeDetails() {
             title: title ? title : customRecipeData!.title,
             image: imageUrl ? imageUrl : customRecipeData!.image,
             instructions: instructions ? instructions : customRecipeData!.instructions,
-            ingredients: ingredients ? ingredients : customRecipeData!.extendedIngredients,
+            extendedIngredients: ingredients ? ingredients : customRecipeData!.extendedIngredients,
         }
 
         await recipesListService.editCustomRecipe(newRecipe);
 
-        setAction(newRecipe.title + newRecipe.ingredients);
+        setAction(newRecipe.title + newRecipe.extendedIngredients);
 
     }
 

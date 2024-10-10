@@ -16,8 +16,6 @@ export default function PersonalLibrary() {
     const [action, setAction] = useState<string>('');
     const [search, setSearch] = useState<string>('');
 
-    const [listIngredients, setListIngredients] = useState<string>('');
-
     useEffect(() => {
 
         getLibrary();
@@ -64,21 +62,6 @@ export default function PersonalLibrary() {
         setAction('search')
     }
 
-    // function handleKeyDown(event: any)
-    // {
-    //     if (event.key === "Enter")
-    //     {
-    //         event.preventDefault();
-    //         const cursorPosition: number = event.target.selectionStart;
-    //         const newText: string = listIngredients.substring(0, cursorPosition) + '/n•' + listIngredients.substring(cursorPosition);
-    //         setListIngredients(newText);
-
-    //         setTimeout(() => {
-    //             event.target.selectionStart = event.target.selectionEnd = cursorPosition + 3;
-    //         }, 0)
-            
-    //     }
-    // }
 
     return (
         <>
