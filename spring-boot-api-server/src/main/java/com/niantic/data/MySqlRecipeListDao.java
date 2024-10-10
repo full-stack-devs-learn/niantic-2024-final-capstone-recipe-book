@@ -169,7 +169,7 @@ public class MySqlRecipeListDao
             statement.setString(2, customRecipe.getTitle());
             statement.setString(3, customRecipe.getImage());
             statement.setString(4, customRecipe.getInstructions());
-            statement.setString(5, customRecipe.getIngredients());
+            statement.setString(5, customRecipe.getExtendedIngredients());
 
             return statement;
         }, keyHolder);
@@ -203,7 +203,7 @@ public class MySqlRecipeListDao
                 """;
 
         jdbcTemplate.update(sql, customRecipe.getTitle(), customRecipe.getImage(),
-                    customRecipe.getInstructions(), customRecipe.getIngredients(),
+                    customRecipe.getInstructions(), customRecipe.getExtendedIngredients(),
                     recipeId);
     }
 

@@ -17,10 +17,9 @@ export default function RecipeDetails() {
     const [ingredients, setIngredients] = useState<string>('');
     const [instructions, setInstructions] = useState<string>('');
     const [action, setAction] = useState<string>('');
-    const { user } = useSelector((state: RootState) => state.authentication)
-    const [userExternalLibrary, setUserExternalLibrary] = useState<any[]>([])
-
-    const [htmlInstructions, setHtmlInstructions] = useState<string>('');;
+    const { user } = useSelector((state: RootState) => state.authentication);
+    const [userExternalLibrary, setUserExternalLibrary] = useState<any[]>([]);
+    const [htmlInstructions, setHtmlInstructions] = useState<string>('');
 
 
     const params = useParams();
@@ -33,45 +32,39 @@ export default function RecipeDetails() {
 
         getRecipe();
 
-        console.log(+custom ? "custom: " + customRecipeData?.extendedIngredients : "external: " + recipeData?.extendedIngredients);
-        console.log(+custom ? "customType: " +typeof customRecipeData?.extendedIngredients : "externalType: " + Array.isArray(recipeData?.extendedIngredients) )
+
         
 
     }, [action])
 
     async function getRecipe() {
 
-        setUserExternalLibrary((await recipesListService.getUserLibrary())
-                                    .filter((card: LibraryRecipeCard) => !card.isCustom)
-                                    .map((card: LibraryRecipeCard) =>[card.externalId, card.apiId]))
+        const library = await recipesListService.getUserLibrary();
+        const externalLibrary = library.filter((card: LibraryRecipeCard) => !card.isCustom)
+                                        .map((card: LibraryRecipeCard) => card.apiId)
 
+        setUserExternalLibrary(externalLibrary)
+                                    
         if (+custom == 0) {
             const selectedRecipe = await spoonacularService.getRecipeById(+id);
             setRecipeData(selectedRecipe);
+            setHtmlInstructions(selectedRecipe.instructions);
 
-            if (userExternalLibrary.includes([selectedRecipe!.id, +id]))
+            if (userExternalLibrary.includes(+id))
             {
                 setAction('delete')
             }
             else
             {
                 setAction('add')
-            }
-
-            setHtmlInstructions(selectedRecipe.instructions);
+            }            
         }
 
         else {
             const selectedCustomRecipe = await recipesListService.getCustomRecipeById(+id)
             setCustomRecipeData(selectedCustomRecipe);
-
             setHtmlInstructions(selectedCustomRecipe.instructions);
         }
-
-        console.log("instructions" + htmlInstructions);
-        console.log(typeof htmlInstructions);
-        
-        
     }
 
     async function editCustomRecipe(event: FormEvent)
@@ -127,7 +120,6 @@ export default function RecipeDetails() {
             }})
                 
         recipesListService.deleteExternalRecipe(externalId, +id)
-
         setAction('add')
     }
 
@@ -225,7 +217,7 @@ export default function RecipeDetails() {
                     </ul>
                     </>
                 ))
-                : ""
+                : <p>{customRecipeData?.extendedIngredients.toString()}</p>
             }
 
             <h5>Instructions</h5>
