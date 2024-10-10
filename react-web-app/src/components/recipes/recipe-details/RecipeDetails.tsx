@@ -6,6 +6,8 @@ import recipesListService from "../../../services/recipes-list-service";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { LibraryRecipeCard } from "../../../models/personal-library/library-recipe-card";
+import { Ingredient } from "../../../models/ingredient";
+import parse from 'html-react-parser';
 
 export default function RecipeDetails() {
     const [recipeData, setRecipeData] = useState<Recipe>();
@@ -18,6 +20,8 @@ export default function RecipeDetails() {
     const { user } = useSelector((state: RootState) => state.authentication)
     const [userExternalLibrary, setUserExternalLibrary] = useState<any[]>([])
 
+    const [htmlInstructions, setHtmlInstructions] = useState<string>('');;
+
 
     const params = useParams();
     const navigate = useNavigate();
@@ -29,6 +33,10 @@ export default function RecipeDetails() {
 
         getRecipe();
 
+        console.log(+custom ? "custom: " + customRecipeData?.extendedIngredients : "external: " + recipeData?.extendedIngredients);
+        console.log(+custom ? "customType: " +typeof customRecipeData?.extendedIngredients : "externalType: " + Array.isArray(recipeData?.extendedIngredients) )
+        
+
     }, [action])
 
     async function getRecipe() {
@@ -36,9 +44,11 @@ export default function RecipeDetails() {
         setUserExternalLibrary((await recipesListService.getUserLibrary())
                                     .filter((card: LibraryRecipeCard) => !card.isCustom)
                                     .map((card: LibraryRecipeCard) =>[card.externalId, card.apiId]))
+
         if (+custom == 0) {
             const selectedRecipe = await spoonacularService.getRecipeById(+id);
             setRecipeData(selectedRecipe);
+
             if (userExternalLibrary.includes([selectedRecipe!.id, +id]))
             {
                 setAction('delete')
@@ -47,11 +57,21 @@ export default function RecipeDetails() {
             {
                 setAction('add')
             }
+
+            setHtmlInstructions(selectedRecipe.instructions);
         }
+
         else {
             const selectedCustomRecipe = await recipesListService.getCustomRecipeById(+id)
             setCustomRecipeData(selectedCustomRecipe);
+
+            setHtmlInstructions(selectedCustomRecipe.instructions);
         }
+
+        console.log("instructions" + htmlInstructions);
+        console.log(typeof htmlInstructions);
+        
+        
     }
 
     async function editCustomRecipe(event: FormEvent)
@@ -114,7 +134,9 @@ export default function RecipeDetails() {
     return (
         <>
             <h3>{+custom ? customRecipeData?.title : recipeData?.title}</h3>
+
             <main className="container">
+            <div>
             {
                 +custom ?
                     <>
@@ -140,7 +162,9 @@ export default function RecipeDetails() {
                                             </div>
                                             <div>
                                                 <label className="form-label" htmlFor="title">Ingredients</label>
-                                                <textarea className="form-control border-primary" name="title" id="title" defaultValue={customRecipeData?.extendedIngredients} onChange={(e) => setIngredients(e.target.value)} />
+                                                <textarea className="form-control border-primary" name="title" id="title" 
+                                                    defaultValue={typeof customRecipeData?.extendedIngredients === 'string' ? customRecipeData?.extendedIngredients : ''} 
+                                                    onChange={(e) => setIngredients(e.target.value)} />
                                             </div>
                                             <div>
                                                 <label className="form-label" htmlFor="title">Instructions</label>
@@ -185,9 +209,27 @@ export default function RecipeDetails() {
                     :
                     <button className="btn btn-danger" onClick={(e) => deleteExternalRecipe(e)}>Remove Recipe from Library</button>
             }
-            <h5>Instructions</h5>
-            <p>{+custom ? customRecipeData?.instructions : recipeData?.instructions}</p>
+            </div>
+
             <img src={+custom ? customRecipeData?.image : recipeData?.image} />
+
+            <h5>Ingredients</h5>
+
+            {
+                !+custom && Array.isArray(recipeData?.extendedIngredients) 
+                ? 
+                recipeData.extendedIngredients.map((ingredient: Ingredient) => (
+                    <>
+                    <ul>
+                        <li>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
+                    </ul>
+                    </>
+                ))
+                : ""
+            }
+
+            <h5>Instructions</h5>
+            {parse(htmlInstructions!)}
             </main>
         </>
     )
