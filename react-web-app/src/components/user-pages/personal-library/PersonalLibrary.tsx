@@ -2,11 +2,11 @@ import RecipeCard from "../../recipes/recipe-card/RecipeCard";
 import recipesListService from "../../../services/recipes-list-service";
 import { FormEvent, useEffect, useState } from "react";
 import { LibraryRecipeCard } from "../../../models/personal-library/library-recipe-card";
+import './PersonalLibrary.css';
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 export default function PersonalLibrary() {
-    const firstName = 'Gregor';
-    const lastName = 'Dzierzon';
-
     const [library, setLibrary] = useState<LibraryRecipeCard[]>([]);
     const [filteredLibrary, setFilteredLibrary] = useState<LibraryRecipeCard[]>([]);
     const [title, setTitle] = useState<string>('');
@@ -15,6 +15,8 @@ export default function PersonalLibrary() {
     const [instructions, setInstructions] = useState<string>('');
     const [action, setAction] = useState<string>('');
     const [search, setSearch] = useState<string>('');
+
+    const { isAuthenticated, user } = useSelector((state: RootState) => state.authentication)
 
     useEffect(() => {
 
@@ -63,11 +65,13 @@ export default function PersonalLibrary() {
 
     return (
         <>
-            <h3>{firstName} {lastName}'s Personal Library</h3>
+            <h1 className="greeting">{user?.username}'s Personal Library</h1>
 
             <main className="container">
 
-                <button className="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
+                <div id="add-recipe">
+                <button className="btn btn-info mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
+                </div>
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -113,11 +117,12 @@ export default function PersonalLibrary() {
                     </div>
                 </div>
 
-                <form className="d-flex" >
-                    <input type="text" className="form-control me-sm-2" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                <form className="d-flex mt-4" >
+                    <input type="text" className="form-control border-secondary me-sm-2" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                     <button type="submit" className="btn btn-secondary my-2 my-sm-0" onClick={(e) => onSearch(e)}>Search</button>
                 </form>
 
+                <div className="card-container mt-4">
                 {
                     filteredLibrary.length == 0
                         ?
@@ -137,6 +142,7 @@ export default function PersonalLibrary() {
                                 id={recipe.isCustom ? recipe.customId : recipe.apiId} />
                         ))
                 }
+                </div>
             </main>
         </>
     )
