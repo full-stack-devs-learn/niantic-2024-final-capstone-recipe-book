@@ -1,0 +1,11 @@
+.card {
+    width: 450px;
+    /* height: 250px; */
+    /* overflow: hidden !important; */
+}
+
+.card-title {
+    text-decoration: none;
+    overflow: hidden;
+    height: 252px;
+}

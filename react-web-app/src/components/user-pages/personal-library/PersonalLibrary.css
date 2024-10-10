@@ -1,0 +1,21 @@
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.greeting{
+    text-align: center;
+}
+
+#add-recipe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border-secondary:focus {
+    border: none;
+}
