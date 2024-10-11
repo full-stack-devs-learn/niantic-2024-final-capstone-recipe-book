@@ -40,16 +40,26 @@ export default function RecipeDetails() {
 
         const library = await recipesListService.getUserLibrary();
         const externalLibrary = library.filter((card: LibraryRecipeCard) => !card.isCustom)
-            .map((card: LibraryRecipeCard) => card.apiId)
+            .map((card: LibraryRecipeCard) => [card.id, card.apiId]) // made this a list instead of just card.apiId
+
+        console.log(externalLibrary, "Library")
 
         setUserExternalLibrary(externalLibrary)
+        console.log("START")
 
         if (+custom == 0) {
             const selectedRecipe = await spoonacularService.getRecipeById(+id);
             setRecipeData(selectedRecipe);
             setHtmlInstructions(selectedRecipe.instructions);
 
-            if (userExternalLibrary.includes(+id)) {
+            const isThere = userExternalLibrary.filter((idList: number[]) => idList[1] === +id)
+            console.log(isThere, "HERE YOU GO")
+
+            // if (userExternalLibrary.includes(+id)) {
+            //     setAction('delete')
+            // }
+            if (isThere.length > 0)
+            {
                 setAction('delete')
             }
             else {
@@ -112,12 +122,15 @@ export default function RecipeDetails() {
         event.stopPropagation();
 
         let externalId = 0;
+        console.log(externalId, "External1")
         userExternalLibrary.forEach(
             (item: number[]) => {
                 if (item[1] === +id) {
                     externalId = item[0]
+                    console.log(externalId, "External")
                 }
             })
+
 
         recipesListService.deleteExternalRecipe(externalId, +id)
         setAction('add')
