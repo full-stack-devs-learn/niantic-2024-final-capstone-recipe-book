@@ -33,7 +33,6 @@ export default function RecipeDetails() {
     useEffect(() => {
 
         getRecipe();
-        console.log("START: ", action)
 
     }, [action])
 
@@ -55,11 +54,9 @@ export default function RecipeDetails() {
             if (isThere.length > 0)
             {
                 setAction('delete')
-                console.log("delete start")
             }
             else {
                 setAction('add')
-                console.log("add start")
             }
         }
 
@@ -102,7 +99,7 @@ export default function RecipeDetails() {
 
     function addRecipeToLibrary(event: FormEvent) {
         event.preventDefault();
-        // event.stopPropagation();
+        event.stopPropagation();
 
         const addRecipe = {
             apiId: +id,
@@ -110,15 +107,13 @@ export default function RecipeDetails() {
             image: recipeData?.image
         }
 
-        console.log("add recipe to lib")
-
         recipesListService.addRecipeFromExternalAPI(addRecipe)
         setAction('delete')
     }
 
     function deleteExternalRecipe(event: FormEvent) {
         event.preventDefault();
-        // event.stopPropagation();
+        event.stopPropagation();
 
         let externalId = 0;
         userExternalLibrary.forEach(
@@ -127,9 +122,6 @@ export default function RecipeDetails() {
                     externalId = item[0]
                 }
         })
-
-        console.log("1")
-
 
         recipesListService.deleteExternalRecipe(externalId, +id)
         setAction('delete recipe to lib')
