@@ -3,3 +3,52 @@
     justify-content: center;
     align-items: center;
 }
+
+.page-box {
+    width: 100%;
+    position: relative;
+}
+
+.login-box, #login-guys {
+    position: absolute;
+}
+
+.login-box {
+    width: 500px;
+    border: 1px solid #097d4c;
+    border-radius: 20px;
+    box-shadow: 10px 5px 5px #097d4c;
+    background-color: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: 680px;
+    top: 40px;
+}
+
+.login-box input {
+    width: 400px !important;
+}
+
+
+#login-title {
+    width: 100%;
+    background-color: #097d4c;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    padding: 10px;
+    color: #f1ead1 !important;
+}
+
+#login-form {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    padding: 20px;
+}
+
+#register-link {
+    margin-bottom: 30px;
+    margin-top: -20px;
+}
