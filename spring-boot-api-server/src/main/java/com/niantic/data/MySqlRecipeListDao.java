@@ -227,7 +227,7 @@ public class MySqlRecipeListDao
     {
         String sql = """
                 DELETE FROM recipes_list
-                WHERE external_id = ?;
+                WHERE id = ?;
                 """;
         jdbcTemplate.update(sql, externalId);
 
