@@ -77,7 +77,7 @@ export default function PersonalLibrary() {
                 <div id="add-recipe">
                     <img id="pizza-guy" src={pizzaGuy} width="300" />
                     <button id="btn-add-custom" className="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
-                    <img id="pepper-guy" src={pepperGuy} width="150" />
+                    <img id="pepper-guy" src={pepperGuy} width="280" />
                 </div>
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">

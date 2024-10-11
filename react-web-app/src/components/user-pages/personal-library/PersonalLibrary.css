@@ -27,6 +27,7 @@
 #btn-add-custom {
     width: 150px;
     top: -3px;
+    z-index: 1;
 }
 
 #pizza-guy {
@@ -35,8 +36,8 @@
 }
 
 #pepper-guy {
-    right:0;
-    top: -100px;
+    right: 0;
+    top: -73px;
 }
 
 .border-secondary:focus {
