@@ -60,7 +60,7 @@ Each recipe card opens up a Recipe Details page which gives the user more inform
 
 Users can add recipes to their personal library.
 
-<img width="1790" alt="user-library" src="https://github.com/user-attachments/assets/e1b7120b-424b-45e2-94dc-bb7586785df5"> <br />
+<img width="1791" alt="user-library" src="https://github.com/user-attachments/assets/7ce82901-f2e9-4062-8b9a-ab8b01951e32"> <br />
 
 Users can also add custom recipes to their personal library.
 
