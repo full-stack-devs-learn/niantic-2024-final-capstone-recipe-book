@@ -161,7 +161,7 @@ export default function Diet(props: {onDietApply: any}) {
                     </div>
                 </div>
 
-                <button className="submit btn btn-outline-primary" onClick={(event) => dietQuery(event)}>Apply Filter</button>
+                <button className="submit btn btn-outline-primary m-4" onClick={(event) => dietQuery(event)}>Apply Filter</button>
             </div>
             </form>
         </div>

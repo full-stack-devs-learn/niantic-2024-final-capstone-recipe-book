@@ -44,6 +44,7 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
     }, [diet, intolerances, cuisine, totalTime])
 
     return (
+        <div className="side-bar me-4">
         <aside>
             <h3>Filters</h3>
 
@@ -52,7 +53,7 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
                 }} />
 
 
-            <div className="accordion" id="accordionExample">
+            <div className="accordion mt-4" id="accordionExample">
                 <Cuisine onCuisineApply={(cuisineString: string) => {
                     setCuisine(cuisineString);
                 }} />
@@ -66,5 +67,6 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
                 }}/>
             </div>
         </aside>
+        </div>
     )
 }

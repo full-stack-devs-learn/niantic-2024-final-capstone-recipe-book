@@ -329,7 +329,7 @@ export default function Cuisine(props: {onCuisineApply: any}) {
                         </label>
                     </div>
                 </div>
-                <button className="submit btn btn-outline-primary" onClick={(event) => cuisineQuery(event)}>Apply Filter</button>
+                <button className="submit btn btn-outline-primary m-4" onClick={(event) => cuisineQuery(event)}>Apply Filter</button>
             </div>
             </form>
         </div>
