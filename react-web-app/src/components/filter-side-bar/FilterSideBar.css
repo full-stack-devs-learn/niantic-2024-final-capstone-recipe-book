@@ -1,7 +1,7 @@
 .side-bar {
     min-width: 300px;
     max-width: 400px;
-    margin-top: 5%;
+    margin-top: 6%;
     background-color: none;
 }
 
@@ -32,10 +32,12 @@ aside {
     overflow: hidden;
 }
 
-.accordion-button {
-    background-color: none;
+.accordion-item {
+    background-color: transparent !important;
 }
 
-.accordion-button:not(.collapsed) {
-    background-color: none;
+#character-side > img {
+    height: 450px;
+    margin-left: -65px;
+    margin-top: 30px;
 }

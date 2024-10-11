@@ -17,7 +17,6 @@ function App() {
   return (
     <Router>
       <Header />
-
       <main id="main-body" className="mt-5 mb-5">
       <Routes>
         <Route path='/' element={<Home />} />
@@ -37,7 +36,6 @@ function App() {
 
       </Routes>
       </main>
-
     </Router>
   )
 }

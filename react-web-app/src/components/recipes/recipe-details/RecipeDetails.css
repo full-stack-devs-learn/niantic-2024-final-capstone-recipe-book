@@ -7,6 +7,19 @@
 .details {
     margin: auto;
     width: 750px;
+    border: 2px solid #097d4c;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.details-title {
+    background-color: #097d4c !important;
+    padding: 10px;
+    color: #f1ead1 !important;
+}
+
+.details-body {
+    padding: 20px;
 }
 
 textarea {

@@ -207,12 +207,12 @@ export default function RecipeDetails() {
                             </>
                             : (action == 'add')
                                 ?
-                                <div className="buttons"> 
-                                <button className="btn btn-primary" onClick={(e) => addRecipeToLibrary(e)}>Add Recipe to Library</button>
+                                <div className="buttons">
+                                    <button className="btn btn-primary" onClick={(e) => addRecipeToLibrary(e)}>Add Recipe to Library</button>
                                 </div>
                                 :
                                 <div className="buttons">
-                                <button className="btn btn-secondary" onClick={(e) => deleteExternalRecipe(e)}>Remove Recipe from Library</button>
+                                    <button className="btn btn-secondary" onClick={(e) => deleteExternalRecipe(e)}>Remove Recipe from Library</button>
                                 </div>
                     }
                 </div>
@@ -222,25 +222,29 @@ export default function RecipeDetails() {
                 </div>
 
                 <section className="mt-4 details">
-                    <h3>Ingredients</h3>
+                    <h3 className="details-title">Ingredients</h3>
 
-                    {
-                        !+custom && Array.isArray(recipeData?.extendedIngredients)
-                            ?
-                            recipeData.extendedIngredients.map((ingredient: Ingredient) => (
-                                <>
-                                    <ul>
-                                        <li>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
-                                    </ul>
-                                </>
-                            ))
-                            : <p>{parse(htmlIngredients)}</p>
-                    }
+                    <div className="details-body">
+                        {
+                            !+custom && Array.isArray(recipeData?.extendedIngredients)
+                                ?
+                                recipeData.extendedIngredients.map((ingredient: Ingredient) => (
+                                    <>
+                                        <ul>
+                                            <li>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
+                                        </ul>
+                                    </>
+                                ))
+                                : <p>{parse(htmlIngredients)}</p>
+                        }
+                    </div>
                 </section>
 
                 <section className="mt-4 details">
-                    <h3>Instructions</h3>
-                    {parse(htmlInstructions!)}
+                    <h3 className="details-title">Instructions</h3>
+                    <div className="details-body">
+                        {parse(htmlInstructions!)}
+                    </div>
                 </section>
             </main>
         </>

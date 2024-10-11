@@ -76,7 +76,11 @@ VALUES  ('user','$2a$10$NkufUPF3V8dEPSZeo1fzHe9ScBu.LOay9S3N32M84yuUM2OJYEJ/.','
 ('gollum','$2a$10$lfQi9jSfhZZhfS6/Kyzv3u3418IgnWXWDQDk7IbcwlCFPgxg9Iud2','ROLE_USER');
 
 INSERT INTO custom_recipes (user_id, title, image, instructions, ingredients)
-VALUES (1, 'Recipe Title', 'https://img.spoonacular.com/recipes/716429-556x370.jpg', '1. Cook', 'eggs');
+VALUES (1, 'Recipe Title', 'https://img.spoonacular.com/recipes/716429-556x370.jpg', '1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula neque sed felis bibendum vulputate. 
+2. Sed convallis, sem nec suscipit posuere, enim ex molestie leo, eget euismod mauris magna id quam. Nunc quis sagittis tortor. Nulla non turpis et risus auctor placerat. Sed tempor ornare consequat. Aliquam non fringilla lectus, in ullamcorper orci. Integer sem arcu, venenatis a consectetur quis, molestie id sem. Mauris id augue iaculis, elementum urna in, lacinia lorem. Nunc mollis nulla at ante tincidunt, ut iaculis sapien rutrum. Duis eleifend enim quis varius porta.', '1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula neque sed felis bibendum vulputate. 
+2. Sed convallis, sem nec suscipit posuere, enim ex molestie leo, eget euismod mauris magna id quam. 
+3. Nunc quis sagittis tortor. Nulla non turpis et risus auctor placerat. Sed tempor ornare consequat. Aliquam non fringilla lectus, in ullamcorper orci. Integer sem arcu, venenatis a consectetur quis, molestie id sem. 
+4. Mauris id augue iaculis, elementum urna in, lacinia lorem. Nunc mollis nulla at ante tincidunt, ut iaculis sapien rutrum. Duis eleifend enim quis varius porta.');
 
 INSERT INTO recipes_list (user_id, is_custom, custom_id, external_id)
 VALUES (1, True, 1, NULL)
