@@ -8,13 +8,13 @@ class SpoonacularService
 
     async getRecipesByUserInput(query: string) 
     {
-        const response = await axios.get<SearchRecipe>(`${this.baseUrl}/complexSearch?apiKey=${import.meta.env.VITE_API_KEY_2}&${query}`);
+        const response = await axios.get<SearchRecipe>(`${this.baseUrl}/complexSearch?apiKey=${import.meta.env.VITE_API_KEY_3}&${query}`);
         return response.data;
     }
 
     async getRecipeById(id: number)
     {
-        const response = await axios.get<Recipe>(`${this.baseUrl}/${id}/information?apiKey=${import.meta.env.VITE_API_KEY_2}`);
+        const response = await axios.get<Recipe>(`${this.baseUrl}/${id}/information?apiKey=${import.meta.env.VITE_API_KEY_3}`);
         return response.data;
     }
 }
