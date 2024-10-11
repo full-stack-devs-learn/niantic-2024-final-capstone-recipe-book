@@ -4,6 +4,7 @@ import TotalTime from './total-time/TotalTime';
 import Cuisine from './cuisine/Cuisine';
 import Diet from './diet/Diet';
 import Intolerances from './intolerances/Intolerances';
+import cabbageGuy from '../../assets/cabbage-character.png';
 
 export default function FilterSideBar(props: { onFiltered: (value: string) => void }) {
     const [totalTime, setTotalTime] = useState<string>("");
@@ -61,6 +62,9 @@ export default function FilterSideBar(props: { onFiltered: (value: string) => vo
                     </div>
                 </div>
             </aside>
+            <div id="character-side">
+                <img src={cabbageGuy} />
+            </div>
         </div>
     )
 }
