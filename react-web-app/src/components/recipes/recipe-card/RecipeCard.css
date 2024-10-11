@@ -5,6 +5,11 @@
     border: none;
 }
 
+.card:hover {
+    background-color: #097d4c !important;
+    color: #f1ead1 !important;
+}
+
 .card-title {
     text-decoration: none;
     overflow: hidden !important;
@@ -12,4 +17,5 @@
     width: 252px;
     border: solid #78c2ad 1px;
     border-radius: 10px;
+    background-color: transparent;
 }
