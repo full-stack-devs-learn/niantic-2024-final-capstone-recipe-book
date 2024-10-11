@@ -38,10 +38,6 @@ function App() {
       </Routes>
       </main>
 
-      <footer>
-        &copy; The Rolling Scones 2024
-      </footer>
-
     </Router>
   )
 }

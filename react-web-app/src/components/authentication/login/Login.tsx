@@ -4,17 +4,16 @@ import { LoginCredentials } from "../../../models/security/user-credentials"
 import authenticationService from "../../../services/authentication-service"
 import { login } from "../../../store/features/authentication-slice"
 import { useAppDispatch } from "../../../store/hooks"
+import './Login.css'
 
-export default function Login()
-{
+export default function Login() {
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
 
     const [username, setUserName] = useState<string>()
     const [password, setPassword] = useState<string>()
 
-    async function loginHandler(event: React.FormEvent<HTMLFormElement>)
-    {
+    async function loginHandler(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
         const credentials = new LoginCredentials()
@@ -29,24 +28,28 @@ export default function Login()
 
     return (
         <div className="container">
-        <h2>Login</h2>
-        <form onSubmit={loginHandler} method="post">
-            <div className="row">
-                <label htmlFor="username">Username:</label>
-                <input type="text" className="form-control" name="username" id="username"
-                    onChange={(e) => setUserName(e.target.value)}
-                />
-            </div>
+            <h2>Login</h2>
+            <form className="mb-3" onSubmit={loginHandler} method="post">
+                <div className="row">
+                    <label htmlFor="username">Username:</label>
+                    <input type="text" className="form-control" name="username" id="username"
+                        onChange={(e) => setUserName(e.target.value)}
+                    />
+                </div>
 
-            <div className="row">
-                <label htmlFor="password">Password:</label>
-                <input type="password" className="form-control" name="password" id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="row">
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" className="form-control" name="password" id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div className="login">
+                    <button className="btn btn-success mt-3" type="submit">Login</button>
+                </div>
+            </form>
+            <div className="register">
+                <Link to="/register">Register as new user</Link>
             </div>
-            <button className="btn btn-success mr-3" type="submit">Login</button>
-        </form>
-        <Link to="/register">Register as new user</Link>
         </div>
     )
 }
