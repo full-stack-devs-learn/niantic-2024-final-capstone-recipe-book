@@ -33,6 +33,7 @@ export default function RecipeDetails() {
     useEffect(() => {
 
         getRecipe();
+        console.log("START: ", action)
 
     }, [action])
 
@@ -40,12 +41,9 @@ export default function RecipeDetails() {
 
         const library = await recipesListService.getUserLibrary();
         const externalLibrary = library.filter((card: LibraryRecipeCard) => !card.isCustom)
-            .map((card: LibraryRecipeCard) => [card.id, card.apiId]) // made this a list instead of just card.apiId
-
-        console.log(externalLibrary, "Library")
+            .map((card: LibraryRecipeCard) => [card.id, card.apiId])
 
         setUserExternalLibrary(externalLibrary)
-        console.log("START")
 
         if (+custom == 0) {
             const selectedRecipe = await spoonacularService.getRecipeById(+id);
@@ -53,17 +51,15 @@ export default function RecipeDetails() {
             setHtmlInstructions(selectedRecipe.instructions);
 
             const isThere = userExternalLibrary.filter((idList: number[]) => idList[1] === +id)
-            console.log(isThere, "HERE YOU GO")
 
-            // if (userExternalLibrary.includes(+id)) {
-            //     setAction('delete')
-            // }
             if (isThere.length > 0)
             {
                 setAction('delete')
+                console.log("delete start")
             }
             else {
                 setAction('add')
+                console.log("add start")
             }
         }
 
@@ -106,34 +102,37 @@ export default function RecipeDetails() {
 
     function addRecipeToLibrary(event: FormEvent) {
         event.preventDefault();
-        event.stopPropagation();
+        // event.stopPropagation();
 
         const addRecipe = {
             apiId: +id,
             title: recipeData?.title,
             image: recipeData?.image
         }
+
+        console.log("add recipe to lib")
+
         recipesListService.addRecipeFromExternalAPI(addRecipe)
         setAction('delete')
     }
 
     function deleteExternalRecipe(event: FormEvent) {
         event.preventDefault();
-        event.stopPropagation();
+        // event.stopPropagation();
 
         let externalId = 0;
-        console.log(externalId, "External1")
         userExternalLibrary.forEach(
             (item: number[]) => {
                 if (item[1] === +id) {
                     externalId = item[0]
-                    console.log(externalId, "External")
                 }
-            })
+        })
+
+        console.log("1")
 
 
         recipesListService.deleteExternalRecipe(externalId, +id)
-        setAction('add')
+        setAction('delete recipe to lib')
     }
 
     return (

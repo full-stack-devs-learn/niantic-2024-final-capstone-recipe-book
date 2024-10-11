@@ -5,6 +5,8 @@ import { LibraryRecipeCard } from "../../../models/personal-library/library-reci
 import './PersonalLibrary.css';
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import pepperGuy from '../../../assets/pepper-character.png';
+import pizzaGuy from '../../../assets/pizza-character.png';
 
 export default function PersonalLibrary() {
     const [library, setLibrary] = useState<LibraryRecipeCard[]>([]);
@@ -73,7 +75,9 @@ export default function PersonalLibrary() {
             <main className="container">
 
                 <div id="add-recipe">
-                    <button className="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
+                    <img id="pizza-guy" src={pizzaGuy} width="300" />
+                    <button id="btn-add-custom" className="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
+                    <img id="pepper-guy" src={pepperGuy} width="150" />
                 </div>
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">

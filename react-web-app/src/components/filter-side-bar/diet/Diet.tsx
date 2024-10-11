@@ -1,10 +1,4 @@
-import { FormEvent, useState } from "react"
-
-// export interface DietProps 
-// {
-//     onDietApply!: any
-// }
-
+import { FormEvent, useState } from "react";
 
 export default function Diet(props: {onDietApply: any}) {
 

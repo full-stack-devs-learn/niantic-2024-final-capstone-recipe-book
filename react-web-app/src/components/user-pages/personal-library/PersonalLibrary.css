@@ -15,6 +15,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    height: 80px;
+    /* background-color: #000000; */
+}
+
+#btn-add-custom, #pizza-guy, #pepper-guy {
+    position: absolute;
+}
+
+#btn-add-custom {
+    width: 150px;
+    top: -3px;
+}
+
+#pizza-guy {
+    left: 0;
+    top: -37px;
+}
+
+#pepper-guy {
+    right:0;
+    top: -100px;
 }
 
 .border-secondary:focus {
