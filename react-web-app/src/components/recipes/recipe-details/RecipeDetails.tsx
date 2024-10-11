@@ -147,13 +147,21 @@ export default function RecipeDetails() {
                                             </div>
                                             <form>
                                                 <div className="modal-body">
+                                                <div className="alert alert-info">
+                                            <p className="alert-heading">Please format your ingredients into a list.</p>
+                                            <p className="mb-0">
+                                                Example <br />
+                                                1. 3 Cups of Flour <br />
+                                                2. 5 Tbs of Sugar
+                                            </p>
+                                        </div>
                                                     <div>
                                                         <label className="form-label" htmlFor="title">Title</label>
                                                         <input className="form-control border-primary" type="text" name="title" id="title" defaultValue={customRecipeData?.title} onChange={(e) => setTitle(e.target.value)} />
                                                     </div>
                                                     <div>
                                                         <label className="form-label" htmlFor="title">Image URL</label>
-                                                        <input className="form-control border-warning" type="text" name="title" id="title" defaultValue={customRecipeData?.image} onChange={(e) => setImageUrl(e.target.value)} disabled />
+                                                        <input className="form-control border-primary" type="text" name="title" id="title" defaultValue={customRecipeData?.image} onChange={(e) => setImageUrl(e.target.value)} />
                                                     </div>
                                                     <div>
                                                         <label className="form-label" htmlFor="title">Ingredients</label>

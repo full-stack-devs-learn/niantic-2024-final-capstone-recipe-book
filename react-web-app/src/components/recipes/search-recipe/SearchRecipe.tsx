@@ -40,6 +40,7 @@ export default function SearchRecipe() {
         <div className="recipe-container container">
             <FilterSideBar onFiltered={(str: string) => buildFilters(str)} />
             <main>
+                <h1>What are you cooking today?</h1>
                 <form className="d-flex" onSubmit={(e) => searchHandler(e)}>
                     <input className="form-control border-secondary me-sm-2" type="search" placeholder="Search" id="queryText" onChange={(e) => buildSearch(e.target.value)} />
                     <button className="btn btn-secondary my-2 my-sm-0" type="submit" onClick={() => setAction(search + filter)}>Search</button>

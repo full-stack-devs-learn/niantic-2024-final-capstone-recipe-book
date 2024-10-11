@@ -1,5 +1,10 @@
-.register, .login {
+h2 {
+    text-align: center;
+}
+
+.register, .login{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+

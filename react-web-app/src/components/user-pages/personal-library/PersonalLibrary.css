@@ -4,6 +4,7 @@
     width: 100%;
     flex-wrap: wrap;
     gap: 30px;
+    margin-bottom: 50px;
 }
 
 .greeting{
