@@ -1,11 +1,15 @@
 .card {
-    width: 450px;
-    /* height: 250px; */
-    /* overflow: hidden !important; */
+    width: 252px;
+    height: 252px;
+    overflow: hidden !important;
+    border: none;
 }
 
 .card-title {
     text-decoration: none;
-    overflow: hidden;
-    height: 252px;
+    overflow: hidden !important;
+    height: 250px;
+    width: 252px;
+    border: solid #78c2ad 1px;
+    border-radius: 10px;
 }

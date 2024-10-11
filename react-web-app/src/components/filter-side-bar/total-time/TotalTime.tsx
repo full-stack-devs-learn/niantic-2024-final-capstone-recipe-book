@@ -18,8 +18,7 @@ export default function TotalTime(props: {onTotalTimeApply: any}) {
   return (
         <form>
         <div id="prep-time-slider">
-                <label htmlFor="customRange1" className="form-label">Total Time</label>
-                <p>Time: {value} minutes</p>
+                <label htmlFor="customRange1" className="form-label">Max Time: {value} minutes</label>
                 <input type="range" className="form-range" min="0" max="120" step="10" defaultValue={0} id="totalTimeRange" onChange={(e) => {
                     setValue(+e.target.value)
                     
@@ -27,7 +26,7 @@ export default function TotalTime(props: {onTotalTimeApply: any}) {
                 }/>
                 <output id="totalTimeOutput"></output>
         </div>
-        <button className="submit btn btn-outline-primary" onClick={(event) => totalTimeQuery(event)}>Apply</button>
+        <button className="submit btn btn-outline-primary mt-2" onClick={(event) => totalTimeQuery(event)}>Apply</button>
         </form>
     )
 

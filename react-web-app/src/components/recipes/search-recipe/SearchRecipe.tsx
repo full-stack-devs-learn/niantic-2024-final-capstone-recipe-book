@@ -8,9 +8,9 @@ import FilterSideBar from "../../filter-side-bar/FilterSideBar";
 export default function SearchRecipe() {
 
     const [recipes, setRecipes] = useState<SearchResults[]>([]);
-    const [action, setAction]   = useState<string>("");
-    const [search, setSearch]   = useState<string>("");
-    const [filter, setFilter]   = useState<string>("");
+    const [action, setAction] = useState<string>("");
+    const [search, setSearch] = useState<string>("");
+    const [filter, setFilter] = useState<string>("");
 
     useEffect(() => {
 
@@ -18,25 +18,21 @@ export default function SearchRecipe() {
 
     }, [action])
 
-    async function loadRecipes()
-    {
-        const searchResults = await spoonacularService.getRecipesByUserInput(action + "&number=2&instructionsRequired=true");
+    async function loadRecipes() {
+        const searchResults = await spoonacularService.getRecipesByUserInput(action + "&number=9&instructionsRequired=true");
         setRecipes(searchResults.results);
     }
 
-    function searchHandler(event: FormEvent)
-    {
+    function searchHandler(event: FormEvent) {
         event.preventDefault();
     }
 
-    function buildFilters(filterStr: string)
-    {
+    function buildFilters(filterStr: string) {
         setFilter(filterStr);
         setAction(search + filterStr);
     }
 
-    function buildSearch(searchStr: string)
-    {
+    function buildSearch(searchStr: string) {
         setSearch("&query=" + searchStr);
     }
 
@@ -45,20 +41,22 @@ export default function SearchRecipe() {
             <FilterSideBar onFiltered={(str: string) => buildFilters(str)} />
             <main>
                 <form className="d-flex" onSubmit={(e) => searchHandler(e)}>
-                    <input className="form-control me-sm-2" type="search" placeholder="Search" id="queryText" onChange={ (e) => buildSearch(e.target.value) } />
+                    <input className="form-control border-secondary me-sm-2" type="search" placeholder="Search" id="queryText" onChange={(e) => buildSearch(e.target.value)} />
                     <button className="btn btn-secondary my-2 my-sm-0" type="submit" onClick={() => setAction(search + filter)}>Search</button>
                 </form>
 
-                {
-                    recipes.map((recipe) => (
-                        <RecipeCard key={recipe.id}
-                            isCustom={false}
-                            title={recipe.title}
-                            image={recipe.image}
-                            id={recipe.id}
-                        ></RecipeCard>
-                    ))
-                }
+                <div className="card-container mt-4">
+                    {
+                        recipes.map((recipe) => (
+                            <RecipeCard key={recipe.id}
+                                isCustom={false}
+                                title={recipe.title}
+                                image={recipe.image}
+                                id={recipe.id}
+                            ></RecipeCard>
+                        ))
+                    }
+                </div>
             </main>
         </div>
     )
