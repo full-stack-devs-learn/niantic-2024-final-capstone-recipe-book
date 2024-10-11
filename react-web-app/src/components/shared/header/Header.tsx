@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../../store/hooks";
 import { logout } from "../../../store/features/authentication-slice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import logo from '../../../assets/honeybutter-logo-color.png'
 import './Header.css'
 
 export default function Header() {
@@ -17,9 +18,9 @@ export default function Header() {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="light">
+        <nav className="navbar navbar-expand-lg" data-bs-theme="dark">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">HoneyButter</Link>
+                <Link className="navbar-brand" to="/"><img className="me-3" src={logo} height="50" />HoneyButter</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

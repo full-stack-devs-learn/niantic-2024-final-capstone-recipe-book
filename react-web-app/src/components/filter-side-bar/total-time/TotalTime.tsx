@@ -26,7 +26,7 @@ export default function TotalTime(props: {onTotalTimeApply: any}) {
                 }/>
                 <output id="totalTimeOutput"></output>
         </div>
-        <button className="submit btn btn-outline-primary mt-2" onClick={(event) => totalTimeQuery(event)}>Apply</button>
+        <button className="submit btn btn-primary" onClick={(event) => totalTimeQuery(event)}>Apply</button>
         </form>
     )
 

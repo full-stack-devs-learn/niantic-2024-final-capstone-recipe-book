@@ -1,16 +1,23 @@
 #profile-card {
-    background-color: cornsilk;
+    box-shadow: 10px 5px 5px #097d4c;
+    border: 3px solid #097d4c;
     padding: 45px;
     border-radius: 50px;
     margin: auto;
-    width: 85%;
+    width: 60%;
     display: flex;
     flex-direction: row;
     column-gap: 50px;
 }
 
 #profile-pic {
-    border-radius: 35px;;
+    border-radius: 35px;
+    overflow: hidden;
+}
+
+#user-name {
+    color: #097d4c;
+    font-size: 60px !important;
 }
 
 #user-stats {

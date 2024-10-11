@@ -73,7 +73,7 @@ export default function PersonalLibrary() {
             <main className="container">
 
                 <div id="add-recipe">
-                    <button className="btn btn-info mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
+                    <button className="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
                 </div>
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
@@ -121,7 +121,7 @@ export default function PersonalLibrary() {
                 </div>
 
                 <form className="d-flex mt-4" >
-                    <input type="text" className="form-control border-secondary me-sm-2" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                    <input type="text" id="search-library" className="form-control border-secondary me-sm-2" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                     <button type="submit" className="btn btn-secondary my-2 my-sm-0" onClick={(e) => onSearch(e)}>Search</button>
                 </form>
 

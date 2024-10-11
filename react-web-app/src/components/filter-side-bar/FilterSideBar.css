@@ -1,4 +1,41 @@
 .side-bar {
     min-width: 300px;
     max-width: 400px;
+    margin-top: 5%;
+    background-color: none;
+}
+
+aside {
+    border: 1px solid #097d4c;
+    border-radius: 20px;
+    box-shadow: 10px 5px 5px #097d4c;
+    background-color: none;
+}
+
+#filter-title {
+    text-align: left;
+    background-color: #097d4c;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    padding: 10px;
+    color: #f1ead1 !important;
+}
+
+#filter-choices {
+    background-color: transparent;
+    padding: 20px;
+}
+
+.accordion {
+    border: 1px solid #097d4c;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background-color: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: none;
 }

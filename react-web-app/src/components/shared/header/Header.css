@@ -1,8 +1,22 @@
+.navbar, .container-fluid, .navbar-brand, .navbar-collapse, .nav-item, .navbar-toggler-icon {
+    background-color: #097d4c;
+}
+
+.navbar-brand {
+    color: #f1ead1 !important;
+    font-family: "Caprasimo", serif !important;
+}
+
 .nav-link:hover {
-    color: whitesmoke !important;
+    color: #f3969a !important;
 }
 
 .nav-link {
+    color: #f1ead1 !important;
     margin-bottom: 0;
+}
+
+#logo-wrapper {
+    background-color: #097d4c;
 }
 

@@ -5,37 +5,31 @@ import Cuisine from './cuisine/Cuisine';
 import Diet from './diet/Diet';
 import Intolerances from './intolerances/Intolerances';
 
-export default function FilterSideBar(props: {onFiltered:(value: string) => void})
-{
+export default function FilterSideBar(props: { onFiltered: (value: string) => void }) {
     const [totalTime, setTotalTime] = useState<string>("");
     const [diet, setDiet] = useState<string>("");
     const [cuisine, setCuisine] = useState<string>("");
     const [intolerances, setIntolerances] = useState<string>("");
 
-    function buildQueryString()
-    {
+    function buildQueryString() {
         let str = "";
 
-        if (diet)
-        {
+        if (diet) {
             str = str + diet;
-        } 
+        }
 
-        if (intolerances)
-        {
+        if (intolerances) {
             str = str + intolerances;
         }
 
-        if (cuisine)
-        {
+        if (cuisine) {
             str = str + cuisine;
         }
 
-        if (totalTime)
-        {
+        if (totalTime) {
             str = str + totalTime;
         }
-        
+
         props.onFiltered(str);
     }
 
@@ -44,29 +38,29 @@ export default function FilterSideBar(props: {onFiltered:(value: string) => void
     }, [diet, intolerances, cuisine, totalTime])
 
     return (
-        <div className="side-bar me-4">
-        <aside>
-            <h3>Filters</h3>
+        <div className="side-bar me-5">
+            <aside>
+                <h3 id="filter-title">Filters</h3>
 
-            <TotalTime onTotalTimeApply={(totalTimeString: string) => {
-                    setTotalTime(totalTimeString);
-                }} />
-
-
-            <div className="accordion mt-4" id="accordionExample">
-                <Cuisine onCuisineApply={(cuisineString: string) => {
-                    setCuisine(cuisineString);
-                }} />
-                <Diet onDietApply={(dietString: string) => 
-                    {
-                        setDiet(dietString);
+                <div id="filter-choices">
+                    <TotalTime onTotalTimeApply={(totalTimeString: string) => {
+                        setTotalTime(totalTimeString);
                     }} />
-                <Intolerances onIntoleranceApply={(intoleranceString: string) =>
-                {
-                    setIntolerances(intoleranceString);
-                }}/>
-            </div>
-        </aside>
+
+
+                    <div className="accordion mt-4" id="accordionExample">
+                        <Cuisine onCuisineApply={(cuisineString: string) => {
+                            setCuisine(cuisineString);
+                        }} />
+                        <Diet onDietApply={(dietString: string) => {
+                            setDiet(dietString);
+                        }} />
+                        <Intolerances onIntoleranceApply={(intoleranceString: string) => {
+                            setIntolerances(intoleranceString);
+                        }} />
+                    </div>
+                </div>
+            </aside>
         </div>
     )
 }

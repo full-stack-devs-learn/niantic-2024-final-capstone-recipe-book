@@ -4,6 +4,11 @@
     align-items: center;
 }
 
+.details {
+    margin: auto;
+    width: 750px;
+}
+
 textarea {
     white-space: pre-line;
 }
