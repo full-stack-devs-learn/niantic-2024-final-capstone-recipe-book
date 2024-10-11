@@ -225,6 +225,37 @@ const map = new Map<string, boolean>();
 ### Roxy's Favorite Code
 
 ```typescript
+async function getRecipe() {
+
+        const library = await recipesListService.getUserLibrary();
+        const externalLibrary = library.filter((card: LibraryRecipeCard) => !card.isCustom)
+            .map((card: LibraryRecipeCard) => card.apiId)
+
+        setUserExternalLibrary(externalLibrary)
+
+        if (+custom == 0) {
+            const selectedRecipe = await spoonacularService.getRecipeById(+id);
+            setRecipeData(selectedRecipe);
+            setHtmlInstructions(selectedRecipe.instructions);
+
+            if (userExternalLibrary.includes(+id)) {
+                setAction('delete')
+            }
+            else {
+                setAction('add')
+            }
+        }
+
+        else {
+            const selectedCustomRecipe = await recipesListService.getCustomRecipeById(+id)
+            setCustomRecipeData(selectedCustomRecipe);
+            setHtmlInstructions(selectedCustomRecipe.instructions);
+            setHtmlIngredients(typeof selectedCustomRecipe.extendedIngredients === "string" ? selectedCustomRecipe.extendedIngredients : "no ingredients")
+        }
+    }
+```
+
+```typescript
 async function editCustomRecipe(event: FormEvent) {
         event.preventDefault();
 
