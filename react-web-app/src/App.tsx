@@ -18,7 +18,7 @@ function App() {
     <Router>
       <Header />
 
-      <main className="container mt-4">
+      <main id="main-body" className="mt-5 mb-5">
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />

@@ -164,7 +164,7 @@ export default function Intolerances(props: {onIntoleranceApply: any}) {
                         </label>
                     </div>
                 </div>
-                <button className="submit btn btn-outline-primary m-4" onClick={(event) => intoleranceQuery(event)}>Apply Filter</button>
+                <button className="submit btn btn-primary ms-4 mb-4" onClick={(event) => intoleranceQuery(event)}>Apply Filter</button>
             </div>
             </form>
         </div>

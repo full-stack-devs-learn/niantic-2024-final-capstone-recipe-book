@@ -1,6 +1,6 @@
 .recipe-container {
-display: flex;
-flex-direction: row;
+    display: flex;
+    flex-direction: row;
 
 }
 
@@ -11,4 +11,8 @@ flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
     gap: 30px;
+}
+
+input#queryText {
+    background-color: #fcfcfc47;
 }

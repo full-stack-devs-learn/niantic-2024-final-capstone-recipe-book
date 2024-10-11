@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import './Cuisine.css'
 
 export default function Cuisine(props: {onCuisineApply: any}) {
 
@@ -22,7 +23,7 @@ export default function Cuisine(props: {onCuisineApply: any}) {
     }
     
     return (
-        <div className="accordion-item">
+        <div className="accordion-item" style={{backgroundColor: '#000000'}}>
             <h2 className="accordion-header" id="headingOne">
                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     Cuisine
@@ -329,7 +330,7 @@ export default function Cuisine(props: {onCuisineApply: any}) {
                         </label>
                     </div>
                 </div>
-                <button className="submit btn btn-outline-primary m-4" onClick={(event) => cuisineQuery(event)}>Apply Filter</button>
+                <button className="submit btn btn-primary ms-4 mb-4" onClick={(event) => cuisineQuery(event)}>Apply Filter</button>
             </div>
             </form>
         </div>

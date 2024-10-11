@@ -133,8 +133,8 @@ export default function RecipeDetails() {
                         +custom ?
                             <>
                                 <div className="buttons">
-                                    <button className="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Recipe</button>
-                                    <button className="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Recipe</button>
+                                    <button className="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Recipe</button>
+                                    <button className="btn btn-secondary m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Recipe</button>
                                 </div>
                                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog" role="document">
@@ -147,14 +147,14 @@ export default function RecipeDetails() {
                                             </div>
                                             <form>
                                                 <div className="modal-body">
-                                                <div className="alert alert-info">
-                                            <p className="alert-heading">Please format your ingredients into a list.</p>
-                                            <p className="mb-0">
-                                                Example <br />
-                                                1. 3 Cups of Flour <br />
-                                                2. 5 Tbs of Sugar
-                                            </p>
-                                        </div>
+                                                    <div className="alert alert-info">
+                                                        <p className="alert-heading">Please format your ingredients into a list.</p>
+                                                        <p className="mb-0">
+                                                            Example <br />
+                                                            1. 3 Cups of Flour <br />
+                                                            2. 5 Tbs of Sugar
+                                                        </p>
+                                                    </div>
                                                     <div>
                                                         <label className="form-label" htmlFor="title">Title</label>
                                                         <input className="form-control border-primary" type="text" name="title" id="title" defaultValue={customRecipeData?.title} onChange={(e) => setTitle(e.target.value)} />
@@ -166,7 +166,7 @@ export default function RecipeDetails() {
                                                     <div>
                                                         <label className="form-label" htmlFor="title">Ingredients</label>
                                                         <textarea className="form-control border-primary" name="title" id="title"
-                                                            defaultValue={typeof customRecipeData?.extendedIngredients === 'string' ? customRecipeData?.extendedIngredients.replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, "")  : ''}
+                                                            defaultValue={typeof customRecipeData?.extendedIngredients === 'string' ? customRecipeData?.extendedIngredients.replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, "") : ''}
                                                             onChange={(e) => setIngredients(e.target.value)} />
                                                     </div>
                                                     <div>
@@ -207,9 +207,13 @@ export default function RecipeDetails() {
                             </>
                             : (action == 'add')
                                 ?
-                                <button className="btn btn-info" onClick={(e) => addRecipeToLibrary(e)}>Add Recipe to Library</button>
+                                <div className="buttons"> 
+                                <button className="btn btn-primary" onClick={(e) => addRecipeToLibrary(e)}>Add Recipe to Library</button>
+                                </div>
                                 :
-                                <button className="btn btn-danger" onClick={(e) => deleteExternalRecipe(e)}>Remove Recipe from Library</button>
+                                <div className="buttons">
+                                <button className="btn btn-secondary" onClick={(e) => deleteExternalRecipe(e)}>Remove Recipe from Library</button>
+                                </div>
                     }
                 </div>
 
@@ -217,23 +221,27 @@ export default function RecipeDetails() {
                     <img src={+custom ? customRecipeData?.image : recipeData?.image} />
                 </div>
 
-                <h3>Ingredients</h3>
+                <section className="mt-4 details">
+                    <h3>Ingredients</h3>
 
-                {
-                    !+custom && Array.isArray(recipeData?.extendedIngredients)
-                        ?
-                        recipeData.extendedIngredients.map((ingredient: Ingredient) => (
-                            <>
-                                <ul>
-                                    <li>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
-                                </ul>
-                            </>
-                        ))
-                        : <p>{parse(htmlIngredients)}</p>
-                }
+                    {
+                        !+custom && Array.isArray(recipeData?.extendedIngredients)
+                            ?
+                            recipeData.extendedIngredients.map((ingredient: Ingredient) => (
+                                <>
+                                    <ul>
+                                        <li>{ingredient.amount} {ingredient.unit} {ingredient.name}</li>
+                                    </ul>
+                                </>
+                            ))
+                            : <p>{parse(htmlIngredients)}</p>
+                    }
+                </section>
 
-                <h3>Instructions</h3>
-                {parse(htmlInstructions!)}
+                <section className="mt-4 details">
+                    <h3>Instructions</h3>
+                    {parse(htmlInstructions!)}
+                </section>
             </main>
         </>
     )
