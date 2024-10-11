@@ -1,0 +1,9 @@
+.buttons, .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+textarea {
+    white-space: pre-line;
+}

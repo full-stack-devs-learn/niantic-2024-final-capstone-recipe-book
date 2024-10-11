@@ -34,11 +34,14 @@ export default function PersonalLibrary() {
     async function addCustomRecipe(event: FormEvent) {
         event.preventDefault();
 
+        let instructionsString = instructions.replace(/\n/g, "<br />\r\n");
+        let ingredientsString = ingredients.replace(/\n/g, "<br />\r\n");
+
         const newRecipe = {
             title: title,
             image: imageUrl,
-            instructions: instructions,
-            extendedIngredients: ingredients
+            instructions: instructionsString,
+            extendedIngredients: ingredientsString
         }
 
         await recipesListService.addCustomRecipe(newRecipe);
