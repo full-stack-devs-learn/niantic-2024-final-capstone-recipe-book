@@ -170,38 +170,32 @@ public List<RecipeSearch> getUserLibrary(int userId)
 ### Jane's Favorite Code
 
 ```typescript
-const [recipes, setRecipes] = useState<SearchResults[]>([]);
-    const [action, setAction] = useState<string>("");
-    const [search, setSearch] = useState<string>("");
-    const [filter, setFilter] = useState<string>("");
+export default function FilterSideBar(props: { onFiltered: (value: string) => void }) 
+{
+    const [totalTime, setTotalTime] = useState<string>("");
+    const [diet, setDiet] = useState<string>("");
+    const [cuisine, setCuisine] = useState<string>("");
+    const [intolerances, setIntolerances] = useState<string>("");
+
+    function buildQueryString() {
+        let str = "";
+        if (diet) { str = str + diet; }
+        if (intolerances) { str = str + intolerances; }
+        if (cuisine) { str = str + cuisine; }
+        if (totalTime) { str = str + totalTime; }
+
+        props.onFiltered(str);
+    }
 
     useEffect(() => {
-
-        loadRecipes();
-
-    }, [action])
-
-    async function loadRecipes() {
-        const searchResults = await spoonacularService.getRecipesByUserInput(action + "&number=9&instructionsRequired=true");
-        setRecipes(searchResults.results);
-    }
-
-    function searchHandler(event: FormEvent) {
-        event.preventDefault();
-    }
-
-    function buildFilters(filterStr: string) {
-        setFilter(filterStr);
-        setAction(search + filterStr);
-    }
-
-    function buildSearch(searchStr: string) {
-        setSearch("&query=" + searchStr);
-    }
-```
-```typescript
-export default function Diet(props: {onDietApply: any}) {
-const map = new Map<string, boolean>();
+        buildQueryString();
+    }, [diet, intolerances, cuisine, totalTime])
+    ...
+}
+    
+export default function Diet(props: {onDietApply: any}) 
+{
+    const map = new Map<string, boolean>();
     const [dietMap, setDietMap] = useState<Map<string, boolean>>(map);
 
     function dietQuery(event: FormEvent)
@@ -220,6 +214,8 @@ const map = new Map<string, boolean>();
         
         if (props.onDietApply) props.onDietApply(dietQueryString);
     }
+    ...
+}
 ```
 
 ### Roxy's Favorite Code
